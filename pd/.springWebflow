@@ -4,8 +4,8 @@
 	<pluginVersion><![CDATA[3.4.0.201310051539-RELEASE]]></pluginVersion>
 	<configs>
 		<config>
-			<file>src/main/webapp/enterPVData.xml</file>
-			<name><![CDATA[enterPVData]]></name>
+			<file>test-flow.xml</file>
+			<name><![CDATA[test]]></name>
 		</config>
 	</configs>
 </webflow-project-description>
