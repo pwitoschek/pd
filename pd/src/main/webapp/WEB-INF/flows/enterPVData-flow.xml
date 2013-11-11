@@ -7,7 +7,7 @@
 	http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd" 
 	start-state="start">
 	
-	<view-state id="start">
+	<view-state id="start" view="/WEB-INF/flows/photovoltaik/startEnterPVData.jsp">
 		<transition on="submit" to="reviewEnterPVData"></transition>
 	</view-state>
 	<view-state id="reviewEnterPVData">
