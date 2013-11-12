@@ -1,0 +1,18 @@
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="educationPU" />
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<bean id="StudentProfileDAO" class="com.coe.jpa.StudentProfileDAO">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
