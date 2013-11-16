@@ -29,6 +29,7 @@
 	</beans:bean>
 
 	<context:component-scan base-package="de.app.pd" />
-	<beans:import resource="spring-webflow.xml"/>
-	
+	<beans:import resource="spring-webflow.xml" />
+	<!-- <beans:import resource="persistence.xml" /> -->
+
 </beans:beans>
