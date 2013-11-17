@@ -3,77 +3,49 @@
  */
 package de.app.pd.entities.pv;
 
+import java.sql.Time;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 /**
- * @author pd
- * 
+ * @author Peter
+ *
  */
-@Entity
-@Table(name = "tagesertraege")
+
 public class Tagesertrag {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-
-	@Column
-	private String wochentag;
-
-	@Column
-	private Date datum;
-
-	@Column
-	private Double erzeugerStrom;
-
-	@Column
+	private String weekDay;
+	private Date date;
+	private Time time;
+	private Double ertrag;
 	private Double durchschnittsTemperatur;
-
-	public String getWochentag() {
-		return this.wochentag;
+	
+	public String getWeekDay() {
+		return weekDay;
 	}
-
-	public void setWochentag(String wochentag) {
-		this.wochentag = wochentag;
+	public void setWeekDay(String weekDay) {
+		this.weekDay = weekDay;
 	}
-
-	public Date getDatum() {
-		return this.datum;
+	public Date getDate() {
+		return date;
 	}
-
-	public void setDatum(Date datum) {
-		this.datum = datum;
+	public void setDate(Date date) {
+		this.date = date;
 	}
-
-	public Double getErzeugerStrom() {
-		return this.erzeugerStrom;
+	public Time getTime() {
+		return time;
 	}
-
-	public void setErzeugerStrom(Double erzeugerStrom) {
-		this.erzeugerStrom = erzeugerStrom;
+	public void setTime(Time time) {
+		this.time = time;
 	}
-
+	public Double getErtrag() {
+		return ertrag;
+	}
+	public void setErtrag(Double ertrag) {
+		this.ertrag = ertrag;
+	}
 	public Double getDurchschnittsTemperatur() {
-		return this.durchschnittsTemperatur;
+		return durchschnittsTemperatur;
 	}
-
 	public void setDurchschnittsTemperatur(Double durchschnittsTemperatur) {
 		this.durchschnittsTemperatur = durchschnittsTemperatur;
 	}
-
-	public long getId() {
-		return this.id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
 }

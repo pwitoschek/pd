@@ -30,12 +30,18 @@ public class PVStartController {
 
 	@RequestMapping(value = "/pv/{function}", method = { RequestMethod.GET })
 	public ModelAndView getStartpage(@PathVariable String function) {
-
 		// ApplicationContext ctx = new ClassPathXmlApplicationContext();
 		// DataSource ds = (DataSource) ctx.getBean("dataSource");
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		String query = "";
+		if (function.equals("uebersichtErzeugterStrom")){
+			query = "select * from tagesertrag";
+//			ModelAndView mav = new ModelAndView("uebersichtErzeugterStrom", model);
+		} else if (function.equals("uebersichtVerbrauchterStrom")){
+			query = "select * from tagesertrag";
+		}
 		try {
 			connection = dataSource.getConnection();
 			ps = connection.prepareStatement("select * from tagesertrag");
@@ -45,7 +51,6 @@ public class PVStartController {
 			}
 			System.out.println("test");
 			
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
