@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.app.pd.entity.pv;
+package de.app.pd.entities.pv;
 
 import java.util.Date;
 

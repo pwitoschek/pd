@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 
-import de.app.pd.entity.pv.Tagesertrag;
+import de.app.pd.entities.pv.Tagesertrag;
 
 /**
  * @author pd

@@ -15,7 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import de.app.pd.entity.pv.Tagesertrag;
+import de.app.pd.entities.pv.Tagesertrag;
 
 /**
  * Handles requests for the application home page.
@@ -39,25 +39,6 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 
 		model.addAttribute("serverTime", formattedDate);
-
-		EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("PDPersitenceUnit");
-		EntityManager em = emf.createEntityManager();
-
-		try {
-			em.getTransaction().begin();
-			Tagesertrag tagesertrag = new Tagesertrag();
-			tagesertrag.setDatum(new Date());
-			tagesertrag.setDurchschnittsTemperatur(4.0);
-			tagesertrag.setErzeugerStrom(10.0);
-			tagesertrag.setWochentag("Samstag");
-			em.persist(tagesertrag);
-			em.getTransaction().commit();
-
-		} catch (Exception e) {
-			em.getTransaction().rollback();
-			logger.error(e.toString());
-		}
 
 		return "home";
 	}
