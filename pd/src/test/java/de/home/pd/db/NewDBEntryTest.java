@@ -32,7 +32,7 @@ public class NewDBEntryTest {
 		try {
 			em.getTransaction().begin();
 			Tagesertrag tagesertrag = new Tagesertrag();
-			tagesertrag.setDate(new Date());
+			tagesertrag.setCurrentDateAndTime(new Date());
 			tagesertrag.setDurchschnittsTemperatur(4.0);
 			tagesertrag.setErtrag(10.0);
 			tagesertrag.setWeekDay("Samstag");
