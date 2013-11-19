@@ -9,13 +9,13 @@ package de.app.pd.entities.pv;
  */
 public class Tagesverbrauch extends Unit {
 
-	private int gebrauchteKWH;
+	private double gebrauchteKWH;
 
-	public int getGebrauchteKWH() {
+	public double getGebrauchteKWH() {
 		return gebrauchteKWH;
 	}
 
-	public void setGebrauchteKWH(int gebrauchteKWH) {
+	public void setGebrauchteKWH(double gebrauchteKWH) {
 		this.gebrauchteKWH = gebrauchteKWH;
 	}
 }
