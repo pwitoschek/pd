@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.app.pd;
+package de.app.controller;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,34 +36,38 @@ public class PVStartController {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String query = "";
-		if (function.equals("uebersichtErzeugterStrom")){
+		if (function.equals("uebersichtErzeugterStrom")) {
 			query = "select * from tagesertrag";
-//			ModelAndView mav = new ModelAndView("uebersichtErzeugterStrom", model);
-		} else if (function.equals("uebersichtVerbrauchterStrom")){
+			// ModelAndView mav = new ModelAndView("uebersichtErzeugterStrom",
+			// model);
+		} else if (function.equals("uebersichtVerbrauchterStrom")) {
 			query = "select * from tagesertrag";
 		}
 		try {
 			connection = dataSource.getConnection();
-			ps = connection.prepareStatement("select * from tagesertrag");
+			ps = connection.prepareStatement(query);
 			rs = ps.executeQuery();
-			while (rs.next()){
+			while (rs.next()) {
 				System.out.println(rs.getString("ertrag"));
 			}
 			System.out.println("test");
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally{
-			try{
+		} finally {
+			try {
 				rs.close();
-			} catch(Exception e){}
-			try{
+			} catch (Exception e) {
+			}
+			try {
 				ps.close();
-			} catch(Exception e){}
-			try{
+			} catch (Exception e) {
+			}
+			try {
 				connection.close();
-			} catch(Exception e){}
+			} catch (Exception e) {
+			}
 		}
 		String viewname = "";
 		if (function.equals("uebersicht")) {
