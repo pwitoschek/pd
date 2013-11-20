@@ -3,15 +3,20 @@
  */
 package db;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.sql.DataSource;
 
-import de.app.interfaces.DBConnection;
+import org.apache.commons.dbutils.DbUtils;
+import org.apache.commons.logging.impl.Log4JLogger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import de.app.interfaces.DataAccessObject;
 import de.app.pd.entities.pv.Tagesertrag;
 import de.app.pd.entities.pv.Tagesverbrauch;
@@ -21,6 +26,7 @@ import de.app.pd.entities.pv.Tagesverbrauch;
  * 
  */
 
+@Component
 public class DataAccessObjectImpl implements DataAccessObject {
 
 	// Da es hier nur eine eine Implementierung dieses Interfaces gibt,
@@ -28,29 +34,36 @@ public class DataAccessObjectImpl implements DataAccessObject {
 	// Hier mache ich aber einen großen Fehler, indem die Connection in dem
 	// Interface geschlossen wird
 	@Autowired
-	DBConnection connection;
-
+	DataSource dataSource;
+	private static Log4JLogger logger = new Log4JLogger();
 	/*
 	 * Diese Methode gibt alle gespeicherten Tageserträge zurück
 	 */
 	@Override
 	public List<Tagesertrag> getTagesertrag() {
 		List<Tagesertrag> tagesertraege = new ArrayList<Tagesertrag>();
+		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String query = "select * from tagesertrag";
+		String query = "select currentDateAndTime, durchschnittsTemperatur, weekDay, ertrag from tagesertrag";
 		try {
+			connection = dataSource.getConnection();
 			ps = connection.prepareStatement(query);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				Tagesertrag tempTagesertrag = new Tagesertrag();
-				tempTagesertrag.setCurrentDateAndTime(new SimpleDateFormat()
-						.parse(rs.getString(0)));
+				
+				tempTagesertrag.setCurrentDateAndTime(new SimpleDateFormat().parse(rs.getString("currentDateAndTime")));
+				tempTagesertrag.setDurchschnittsTemperatur(Double.parseDouble(rs.getString("durchSchnittsTemperatur")));
+				tempTagesertrag.setWeekDay(rs.getString("weekDay"));
+				tempTagesertrag.setErtrag(Double.valueOf(rs.getString("ertrag")));
 
 				tagesertraege.add(tempTagesertrag);
 			}
 		} catch (Exception e) {
-
+			logger.error(e.getMessage());
+		} finally {
+			DbUtils.closeQuietly(connection, ps, rs);
 		}
 		return tagesertraege;
 	}
@@ -62,8 +75,31 @@ public class DataAccessObjectImpl implements DataAccessObject {
 	 */
 	@Override
 	public List<Tagesverbrauch> getTagesverbrauch() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Tagesverbrauch> tagesverbrauchs = new ArrayList<Tagesverbrauch>();
+		Connection connection = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String query = "select currentDateAndTime, durchschnittsTemperatur, weekDay, gebrauchteKWH from tagesertrag";
+		try {
+			connection = dataSource.getConnection();
+			ps = connection.prepareStatement(query);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Tagesverbrauch tempTagesverbrauch = new Tagesverbrauch();
+				
+				tempTagesverbrauch.setCurrentDateAndTime(new SimpleDateFormat().parse(rs.getString("currentDateAndTime")));
+				tempTagesverbrauch.setDurchschnittsTemperatur(Double.parseDouble(rs.getString("durchSchnittsTemperatur")));
+				tempTagesverbrauch.setWeekDay(rs.getString("weekDay"));
+				tempTagesverbrauch.setGebrauchteKWH(Double.valueOf(rs.getString("gebrauchteKWH")));
+
+				tagesverbrauchs.add(tempTagesverbrauch);
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		} finally {
+			DbUtils.closeQuietly(connection, ps, rs);
+		}
+		return tagesverbrauchs;
 	}
 
 	/*

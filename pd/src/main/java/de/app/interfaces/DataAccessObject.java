@@ -12,6 +12,7 @@ import de.app.pd.entities.pv.Tagesverbrauch;
  * @author Peter
  * 
  */
+
 public interface DataAccessObject {
 	public List<Tagesertrag> getTagesertrag();
 

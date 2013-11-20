@@ -3,19 +3,17 @@
  */
 package de.app.controller;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.List;
 
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import db.DataAccessObjectImpl;
+import de.app.interfaces.DataAccessObject;
+import de.app.pd.entities.pv.Tagesverbrauch;
 
 /**
  * @author pd
@@ -25,55 +23,16 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class PVStartController {
 
-	@Autowired
-	DataSource dataSource;
-
 	@RequestMapping(value = "/pv/{function}", method = { RequestMethod.GET })
 	public ModelAndView getStartpage(@PathVariable String function) {
-		// ApplicationContext ctx = new ClassPathXmlApplicationContext();
-		// DataSource ds = (DataSource) ctx.getBean("dataSource");
-		Connection connection = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		String query = "";
-		if (function.equals("uebersichtErzeugterStrom")) {
-			query = "select * from tagesertrag";
-			// ModelAndView mav = new ModelAndView("uebersichtErzeugterStrom",
-			// model);
-		} else if (function.equals("uebersichtVerbrauchterStrom")) {
-			query = "select * from tagesertrag";
-		}
-		try {
-			connection = dataSource.getConnection();
-			ps = connection.prepareStatement(query);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				System.out.println(rs.getString("ertrag"));
-			}
-			System.out.println("test");
+		DataAccessObject dao = new DataAccessObjectImpl();
+		List<Tagesverbrauch> tagesverbrauchs = dao.getTagesverbrauch();
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			try {
-				rs.close();
-			} catch (Exception e) {
-			}
-			try {
-				ps.close();
-			} catch (Exception e) {
-			}
-			try {
-				connection.close();
-			} catch (Exception e) {
-			}
-		}
 		String viewname = "";
-		if (function.equals("uebersicht")) {
-			viewname = "uebersicht";
+		if (function.equals("uTagesverbrauch")) {
+			viewname = "uTagesverbrauch";
 		}
-		return new ModelAndView(viewname);
+		return new ModelAndView("uTagesverbrauch", "tagesverbrauchs",
+				tagesverbrauchs);
 	}
-
 }
