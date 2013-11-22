@@ -33,7 +33,6 @@ public class PVStartController {
 		if (function.equals("uTagesverbrauch")) {
 			viewname = "uTagesverbrauch";
 		}
-		return new ModelAndView("uTagesverbrauch", "tagesverbrauchs",
-				tagesverbrauchs);
+		return new ModelAndView("uTagesverbrauch", "tagesverbrauchs", tagesverbrauchs);
 	}
 }

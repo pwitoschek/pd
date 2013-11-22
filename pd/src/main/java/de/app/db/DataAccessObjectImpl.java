@@ -1,7 +1,7 @@
 /**
  * 
  */
-package db;
+package de.app.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,7 +25,6 @@ import de.app.pd.entities.pv.Tagesverbrauch;
  * @author Peter
  * 
  */
-
 @Component
 public class DataAccessObjectImpl implements DataAccessObject {
 
@@ -35,7 +34,9 @@ public class DataAccessObjectImpl implements DataAccessObject {
 	// Interface geschlossen wird
 	@Autowired
 	DataSource dataSource;
+
 	private static Log4JLogger logger = new Log4JLogger();
+
 	/*
 	 * Diese Methode gibt alle gespeicherten Tageserträge zurück
 	 */
@@ -52,11 +53,14 @@ public class DataAccessObjectImpl implements DataAccessObject {
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				Tagesertrag tempTagesertrag = new Tagesertrag();
-				
-				tempTagesertrag.setCurrentDateAndTime(new SimpleDateFormat().parse(rs.getString("currentDateAndTime")));
-				tempTagesertrag.setDurchschnittsTemperatur(Double.parseDouble(rs.getString("durchSchnittsTemperatur")));
+
+				tempTagesertrag.setCurrentDateAndTime(new SimpleDateFormat()
+						.parse(rs.getString("currentDateAndTime")));
+				tempTagesertrag.setDurchschnittsTemperatur(Double
+						.parseDouble(rs.getString("durchSchnittsTemperatur")));
 				tempTagesertrag.setWeekDay(rs.getString("weekDay"));
-				tempTagesertrag.setErtrag(Double.valueOf(rs.getString("ertrag")));
+				tempTagesertrag
+						.setErtrag(Double.valueOf(rs.getString("ertrag")));
 
 				tagesertraege.add(tempTagesertrag);
 			}
@@ -79,15 +83,15 @@ public class DataAccessObjectImpl implements DataAccessObject {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String query = "select currentDateAndTime, durchschnittsTemperatur, weekDay, gebrauchteKWH from tagesertrag";
+		String query = "select currentDateAndTime, durchschnittsTemperatur, weekDay, gebrauchteKWH from tagesverbrauch";
 		try {
 			connection = dataSource.getConnection();
 			ps = connection.prepareStatement(query);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				Tagesverbrauch tempTagesverbrauch = new Tagesverbrauch();
-				
-				tempTagesverbrauch.setCurrentDateAndTime(new SimpleDateFormat().parse(rs.getString("currentDateAndTime")));
+
+				tempTagesverbrauch.setCurrentDateAndTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(rs.getString("currentDateAndTime")));
 				tempTagesverbrauch.setDurchschnittsTemperatur(Double.parseDouble(rs.getString("durchSchnittsTemperatur")));
 				tempTagesverbrauch.setWeekDay(rs.getString("weekDay"));
 				tempTagesverbrauch.setGebrauchteKWH(Double.valueOf(rs.getString("gebrauchteKWH")));
