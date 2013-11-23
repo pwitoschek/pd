@@ -3,6 +3,7 @@
  */
 package de.app.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +29,13 @@ public class PVStartController {
 
 	@RequestMapping(value = "/pv/{function}", method = { RequestMethod.GET })
 	public ModelAndView getStartpage(@PathVariable String function) {
-		List<Tagesverbrauch> tagesverbrauchs = dao.getTagesverbrauch();
+		List<Tagesverbrauch> tagesverbrauchs = dao.getTagesverbrauch(new Date()
+				.getMonth());
 		String viewname = "";
 		if (function.equals("uTagesverbrauch")) {
 			viewname = "uTagesverbrauch";
 		}
-		return new ModelAndView("uTagesverbrauch", "tagesverbrauchs", tagesverbrauchs);
+		return new ModelAndView("uTagesverbrauch", "tagesverbrauchs",
+				tagesverbrauchs);
 	}
 }

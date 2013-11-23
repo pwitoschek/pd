@@ -12,7 +12,8 @@
 				<th>Datum</th>
 				<th>Wochentag</th>
 				<th>Temperatur</th>
-				<th>KW/H</th>
+				<th>KW/H Gesamt</th>
+				<th>KW/H Tag</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -22,6 +23,7 @@
 					<td>${tagesverbrauch.weekDay}</td>
 					<td>${tagesverbrauch.durchschnittsTemperatur}</td>
 					<td>${tagesverbrauch.gebrauchteKWH}</td>
+					<td>${tagesverbrauch.sumToday}</td>
 				<tr>
 			</c:forEach>
 		</tbody>

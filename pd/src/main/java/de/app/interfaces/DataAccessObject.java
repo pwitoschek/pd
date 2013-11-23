@@ -13,9 +13,9 @@ import de.app.pd.entities.pv.Tagesverbrauch;
  * 
  */
 public interface DataAccessObject {
-	public List<Tagesertrag> getTagesertrag();
+	public List<Tagesertrag> getTagesertrag(int month);
 
-	public List<Tagesverbrauch> getTagesverbrauch();
+	public List<Tagesverbrauch> getTagesverbrauch(int month);
 
 	public void addTagesertrag();
 
