@@ -21,7 +21,7 @@
 	</view-state>
 
 	<action-state id="savePVData">
-		<evaluate expression="DataAccessObject.addTagesertrag(tagesertrag)"></evaluate>
+		<evaluate expression="dataAccessObjectImpl.addTagesertrag(tagesertrag)"></evaluate>
 		<transition on="success" to="enterPVDataSuccess"/>
 		<transition on="failure" to="enterPVDataFailure"/>
 	</action-state>

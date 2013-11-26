@@ -8,7 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -16,6 +18,9 @@ import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.logging.impl.Log4JLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.webflow.core.collection.AttributeMap;
+import org.springframework.webflow.core.collection.LocalAttributeMap;
+import org.springframework.webflow.execution.Event;
 
 import de.app.interfaces.DataAccessObject;
 import de.app.pd.entities.pv.Tagesertrag;
@@ -123,37 +128,35 @@ public class DataAccessObjectImpl implements DataAccessObject {
 	 * @see de.app.interfaces.DataAccessObject#addTagesertrag()
 	 */
 	@Override
-	public boolean addTagesertrag(Tagesertrag tagesertrag) {
-		boolean result = false;
+	public Event addTagesertrag(Tagesertrag tagesertrag) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("testAttribute", "test1");
+		AttributeMap attributeMap = new LocalAttributeMap(map);
+
+		String result = "failure";
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String query = "";
 		try {
-			query = "INSERT INTO pd_spring.tagesertrag (" +
-					"id," +
-					"currentDateAndTime," +
-					"durchschnittsTemperatur," + 
-					"weekDay," +
-					"ertrag" +
-					")" + 
-					"VALUES (" + 
-							"NULL ," +
-							tagesertrag.getCurrentDateAndTime() + "," + 
-							tagesertrag.getDurchschnittsTemperatur() + "," +
-							tagesertrag.getWeekDay() + "," +
-							tagesertrag.getErtrag() + ")";
-			
+			query = "INSERT INTO pd_spring.tagesertrag (" + "id,"
+					+ "currentDateAndTime," + "durchschnittsTemperatur,"
+					+ "weekDay," + "ertrag" + ")" + "VALUES (" + "NULL ,"
+					+ tagesertrag.getCurrentDateAndTime() + ","
+					+ tagesertrag.getDurchschnittsTemperatur() + ","
+					+ tagesertrag.getWeekDay() + "," + tagesertrag.getErtrag()
+					+ ")";
+
 			connection = dataSource.getConnection();
 			ps = connection.prepareStatement(query);
 			ps.execute();
-			result = true;
+			result = "success";
 		} catch (Exception e) {
 			logger.error(e.getMessage());
-		} finally{
+		} finally {
 			DbUtils.closeQuietly(connection, ps, rs);
 		}
-		return result;
+		return new Event(this, result, attributeMap);
 	}
 
 	/*
@@ -161,6 +164,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
 	 * 
 	 * @see de.app.interfaces.DataAccessObject#addTagesverbrauch()
 	 */
+	@Override
 	public boolean addTagesverbrauch(Tagesverbrauch tagesverbrauch) {
 		boolean result = false;
 		Connection connection = null;
@@ -168,27 +172,21 @@ public class DataAccessObjectImpl implements DataAccessObject {
 		ResultSet rs = null;
 		String query = "";
 		try {
-			query = "INSERT INTO pd_spring.tagesverbrauch (" +
-					"id," +
-					"currentDateAndTime," +
-					"durchschnittsTemperatur," + 
-					"weekDay," +
-					"gebrauchteKWH" +
-					")" + 
-					"VALUES (" + 
-							"NULL ," +
-							tagesverbrauch.getCurrentDateAndTime() + "," + 
-							tagesverbrauch.getDurchschnittsTemperatur() + "," +
-							tagesverbrauch.getWeekDay() + "," +
-							tagesverbrauch.getGebrauchteKWH() + ")";
-			
+			query = "INSERT INTO pd_spring.tagesverbrauch (" + "id,"
+					+ "currentDateAndTime," + "durchschnittsTemperatur,"
+					+ "weekDay," + "gebrauchteKWH" + ")" + "VALUES ("
+					+ "NULL ," + tagesverbrauch.getCurrentDateAndTime() + ","
+					+ tagesverbrauch.getDurchschnittsTemperatur() + ","
+					+ tagesverbrauch.getWeekDay() + ","
+					+ tagesverbrauch.getGebrauchteKWH() + ")";
+
 			connection = dataSource.getConnection();
 			ps = connection.prepareStatement(query);
 			ps.execute();
 			result = true;
 		} catch (Exception e) {
 			logger.error(e.getMessage());
-		} finally{
+		} finally {
 			DbUtils.closeQuietly(connection, ps, rs);
 		}
 		return result;
@@ -232,7 +230,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
 	public boolean deleteTagesertrag(Tagesertrag tagesertrag) {
 		// TODO Auto-generated method stub
 		return false;
-		
+
 	}
 
 }

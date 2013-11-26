@@ -5,6 +5,8 @@ package de.app.interfaces;
 
 import java.util.List;
 
+import org.springframework.webflow.execution.Event;
+
 import de.app.pd.entities.pv.Tagesertrag;
 import de.app.pd.entities.pv.Tagesverbrauch;
 
@@ -17,7 +19,7 @@ public interface DataAccessObject {
 
 	public List<Tagesverbrauch> getTagesverbrauch(int month);
 
-	public boolean addTagesertrag(Tagesertrag tagesertrag);
+	public Event addTagesertrag(Tagesertrag tagesertrag);
 
 	public boolean addTagesverbrauch(Tagesverbrauch tagesverbrauch);
 
