@@ -17,16 +17,16 @@ public interface DataAccessObject {
 
 	public List<Tagesverbrauch> getTagesverbrauch(int month);
 
-	public void addTagesertrag();
+	public boolean addTagesertrag(Tagesertrag tagesertrag);
 
-	public void addTagesverbrauch();
+	public boolean addTagesverbrauch(Tagesverbrauch tagesverbrauch);
 
-	public void deleteTagesverbrauch();
+	public boolean deleteTagesverbrauch(Tagesverbrauch tagesverbrauch);
 
-	public void deleteTagesertrag();
+	public boolean deleteTagesertrag(Tagesertrag tagesertrag);
 
-	public void updateTagesverbrauch(Tagesverbrauch tagesverbrauch);
+	public boolean updateTagesverbrauch(Tagesverbrauch tagesverbrauch);
 
-	public void updateTagesertrag(Tagesertrag tagesertrag);
+	public boolean updateTagesertrag(Tagesertrag tagesertrag);
 
 }

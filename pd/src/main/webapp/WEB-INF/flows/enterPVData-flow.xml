@@ -3,21 +3,30 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flow="http://www.springframework.org/schema/webflow-config"
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
 	http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd"
-	start-state="start">
+	start-state="startEnterPVData">
 
-	<view-state id="start"
-		view="/WEB-INF/flows/photovoltaik/startEnterPVData.jsp" model="tagesertrag">
+	<view-state id="startEnterPVData"
+		view="/WEB-INF/flows/photovoltaik/startEnterPVData.jsp" model="flowScope.tagesertrag">
+		<var name="flowScope.tagesertrag" class="de.app.pd.entities.pv.Tagesertrag"/>
 		<on-entry>
 			<evaluate expression="tagesertrag.setInitValues()" result="flowScope.tagesertrag" />
 		</on-entry>
 		<transition on="submit" to="reviewEnterPVData"></transition>
-	</view-state>
-	<view-state id="reviewEnterPVData">
-		<transition on="confirm" to="confiremdEnterPVData"></transition>
-		<transition on="cancel" to="canceledEnterPVData"></transition>
+		<transition on="cancel" to="startEnterPVData"></transition>
 	</view-state>
 
-	<end-state id="confiremdEnterPVData"></end-state>
-	<end-state id="canceledEnterPVData"></end-state>
+	<view-state id="reviewEnterPVData" model="flowScope.tagesertrag" view="/WEB-INF/flows/photovoltaik/reviewEnterPVData.jsp">
+		<transition on="submit" to="savePVData"></transition>
+		<transition on="cancel" to="startEnterPVData"></transition>
+	</view-state>
+
+	<action-state id="savePVData">
+		<evaluate expression="DataAccessObject.addTagesertrag(tagesertrag)"></evaluate>
+		<transition on="success" to="enterPVDataSuccess"/>
+		<transition on="failure" to="enterPVDataFailure"/>
+	</action-state>
+
+	<end-state id="enterPVDataSuccess"></end-state>
+	<end-state id="enterPVDataFailure"></end-state>
 
 </flow>

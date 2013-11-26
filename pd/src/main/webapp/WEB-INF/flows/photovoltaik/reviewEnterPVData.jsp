@@ -1,3 +1,5 @@
+<%@page import="de.app.pd.entities.pv.Tagesertrag"%>
+<%@page import="java.util.Enumeration"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -6,37 +8,36 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Start Enter PV Data</title>
-	<style type="text/css">
-		.error{
-			color:red;
-		}
-	</style>
+<title>Insert title here</title>
 </head>
-
 <body>
-	Der durch den Mehtodenaufruf setInitValues() ermittelte Wochentag: <c:out value="${tagesertrag.weekDay }"></c:out><br>
-	und der aktuelle Zeitstempel: <c:out value="${tagesertrag.currentDateAndTime }"></c:out>.
 
 	<form:form modelAttribute="tagesertrag">
 		<div>
+			Bitte kontrollieren Sie Ihre Angaben:
 			<table>
 				<tr>
-					<td>Bitte geben Sie den heutigen Ertrag ein:</td>
-					<td><form:input path="ertrag"/></td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<form:errors path="ertrag" cssClass="error"/>
+					<td>Aktueller Zeitstempel:</td>
+					<td>
+						<c:out value="${tagesertrag.currentDateAndTime }"></c:out>
 					</td>
 				</tr>
 				<tr>
-					<td>Bitte geben Sie die heutige Durchschnittstemperatur ein:</td>
-					<td><form:input path="durchschnittsTemperatur"/></td>
+					<td>Aktueller Wochentag:</td>
+					<td>
+						<c:out value="${tagesertrag.weekDay }"></c:out>
+					</td>
 				</tr>
 				<tr>
-					<td colspan="2">
-						<form:errors path="durchschnittsTemperatur" cssClass="error"/>
+					<td>Durchschnittstemperatur:</td>
+					<td>
+						<c:out value="${tagesertrag.durchschnittsTemperatur }"></c:out>
+					</td>
+				</tr>
+				<tr>
+					<td>Tagesertrag:</td>
+					<td>
+						<c:out value="${tagesertrag.ertrag }"></c:out>
 					</td>
 				</tr>
 			</table>

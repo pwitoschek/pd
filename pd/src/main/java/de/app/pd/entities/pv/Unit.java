@@ -1,8 +1,13 @@
 package de.app.pd.entities.pv;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public abstract class Unit {
+public abstract class Unit implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6408427900445775413L;
 	private String weekDay;
 	private Date currentDateAndTime;
 	private Double durchschnittsTemperatur;

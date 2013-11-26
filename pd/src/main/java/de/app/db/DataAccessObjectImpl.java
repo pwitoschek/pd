@@ -123,9 +123,37 @@ public class DataAccessObjectImpl implements DataAccessObject {
 	 * @see de.app.interfaces.DataAccessObject#addTagesertrag()
 	 */
 	@Override
-	public void addTagesertrag() {
-		// TODO Auto-generated method stub
-
+	public boolean addTagesertrag(Tagesertrag tagesertrag) {
+		boolean result = false;
+		Connection connection = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String query = "";
+		try {
+			query = "INSERT INTO pd_spring.tagesertrag (" +
+					"id," +
+					"currentDateAndTime," +
+					"durchschnittsTemperatur," + 
+					"weekDay," +
+					"ertrag" +
+					")" + 
+					"VALUES (" + 
+							"NULL ," +
+							tagesertrag.getCurrentDateAndTime() + "," + 
+							tagesertrag.getDurchschnittsTemperatur() + "," +
+							tagesertrag.getWeekDay() + "," +
+							tagesertrag.getErtrag() + ")";
+			
+			connection = dataSource.getConnection();
+			ps = connection.prepareStatement(query);
+			ps.execute();
+			result = true;
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		} finally{
+			DbUtils.closeQuietly(connection, ps, rs);
+		}
+		return result;
 	}
 
 	/*
@@ -133,32 +161,37 @@ public class DataAccessObjectImpl implements DataAccessObject {
 	 * 
 	 * @see de.app.interfaces.DataAccessObject#addTagesverbrauch()
 	 */
-	@Override
-	public void addTagesverbrauch() {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.app.interfaces.DataAccessObject#deleteTagesverbrauch()
-	 */
-	@Override
-	public void deleteTagesverbrauch() {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.app.interfaces.DataAccessObject#deleteTagesertrag()
-	 */
-	@Override
-	public void deleteTagesertrag() {
-		// TODO Auto-generated method stub
-
+	public boolean addTagesverbrauch(Tagesverbrauch tagesverbrauch) {
+		boolean result = false;
+		Connection connection = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String query = "";
+		try {
+			query = "INSERT INTO pd_spring.tagesverbrauch (" +
+					"id," +
+					"currentDateAndTime," +
+					"durchschnittsTemperatur," + 
+					"weekDay," +
+					"gebrauchteKWH" +
+					")" + 
+					"VALUES (" + 
+							"NULL ," +
+							tagesverbrauch.getCurrentDateAndTime() + "," + 
+							tagesverbrauch.getDurchschnittsTemperatur() + "," +
+							tagesverbrauch.getWeekDay() + "," +
+							tagesverbrauch.getGebrauchteKWH() + ")";
+			
+			connection = dataSource.getConnection();
+			ps = connection.prepareStatement(query);
+			ps.execute();
+			result = true;
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		} finally{
+			DbUtils.closeQuietly(connection, ps, rs);
+		}
+		return result;
 	}
 
 	/*
@@ -169,8 +202,9 @@ public class DataAccessObjectImpl implements DataAccessObject {
 	 * .pv.Tagesverbrauch)
 	 */
 	@Override
-	public void updateTagesverbrauch(Tagesverbrauch tagesverbrauch) {
+	public boolean updateTagesverbrauch(Tagesverbrauch tagesverbrauch) {
 		// TODO Auto-generated method stub
+		return false;
 
 	}
 
@@ -182,9 +216,23 @@ public class DataAccessObjectImpl implements DataAccessObject {
 	 * .pv.Tagesertrag)
 	 */
 	@Override
-	public void updateTagesertrag(Tagesertrag tagesertrag) {
+	public boolean updateTagesertrag(Tagesertrag tagesertrag) {
 		// TODO Auto-generated method stub
+		return false;
 
+	}
+
+	@Override
+	public boolean deleteTagesverbrauch(Tagesverbrauch tagesverbrauch) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean deleteTagesertrag(Tagesertrag tagesertrag) {
+		// TODO Auto-generated method stub
+		return false;
+		
 	}
 
 }
