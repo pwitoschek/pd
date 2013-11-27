@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flow="http://www.springframework.org/schema/webflow-config"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+	http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd"
+	start-state="start">
+
+	<view-state id="start"
+		view="/WEB-INF/flows/photovoltaik/startEnterPVData.jsp" model="tagesertrag">
+		<on-entry>
+			<evaluate expression="tagesertrag.setInitValues()" result="flowScope.tagesertrag" />
+		</on-entry>
+		<transition on="submit" to="reviewEnterPVData"></transition>
+	</view-state>
+	<view-state id="reviewEnterPVData">
+		<transition on="confirm" to="confiremdEnterPVData"></transition>
+		<transition on="cancel" to="canceledEnterPVData"></transition>
+	</view-state>
+
+	<end-state id="confiremdEnterPVData"></end-state>
+	<end-state id="canceledEnterPVData"></end-state>
+
+</flow>
