@@ -16,6 +16,10 @@ import de.app.pd.entities.pv.Tagesertrag;
  *         Klasse eine Methode enthalten muss, die mit "validate" beginnt und
  *         den Namen des zu validierenden View-States enthält. Hier z.B.
  *         validateStartEnterPVData
+ * 
+ * 
+ *         Um den Validator ansprechen zu können, muss die Klasse als Bean im
+ *         Spring Container geladen sein.
  */
 public class TagesertragValidator {
 

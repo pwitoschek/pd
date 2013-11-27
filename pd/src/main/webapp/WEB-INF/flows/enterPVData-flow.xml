@@ -7,20 +7,34 @@
 
 	<view-state id="startEnterPVData"
 		view="/WEB-INF/flows/photovoltaik/startEnterPVData.jsp" model="flowScope.tagesertrag">
+		<!-- muss ich hier überhaupt Beans als Variablen deklarieren?! das sollte
+			 doch der Spring Container automatisch injizieren?!
+			 -->
 		<var name="flowScope.tagesertrag" class="de.app.pd.entities.pv.Tagesertrag"/>
+		<var name="flowScope.tagesverbrauch" class="de.app.pd.entities.pv.Tagesverbrauch"/>
 		<on-entry>
 			<evaluate expression="tagesertrag.setInitValues()" result="flowScope.tagesertrag" />
 		</on-entry>
-		<transition on="submit" to="reviewEnterPVData"></transition>
+		<transition on="submit" to="enterVerbrauch"></transition>
 		<transition on="cancel" to="startEnterPVData"></transition>
 	</view-state>
+	
+	<view-state id="enterVerbrauch" 
+		view="/WEB-INF/flows/photovoltaik/startEnterVerbrauch.jsp" model="flowScope.tagesverbrauch">
+		<on-entry>
+			<evaluate expression="tagesverbrauch.setInitValues()" result="flowScope.tagesverbrauch" />
+		</on-entry>
+		<transition on="submit" to="reviewEnterPVData"></transition>
+		<transition on="back" to="startEnterPVData"></transition>
+	</view-state>
 
-	<view-state id="reviewEnterPVData" model="flowScope.tagesertrag" view="/WEB-INF/flows/photovoltaik/reviewEnterPVData.jsp">
+	<view-state id="reviewEnterPVData" view="/WEB-INF/flows/photovoltaik/reviewEnterPVData.jsp">
 		<transition on="submit" to="savePVData"></transition>
-		<transition on="cancel" to="startEnterPVData"></transition>
+		<transition on="back" to="enterVerbrauch"></transition>
 	</view-state>
 
 	<action-state id="savePVData">
+		<evaluate expression="dataAccessObjectImpl.addTagesverbrauch(tagesverbrauch)"></evaluate>
 		<evaluate expression="dataAccessObjectImpl.addTagesertrag(tagesertrag)"></evaluate>
 		<transition on="success" to="enterPVDataSuccess"/>
 		<transition on="failure" to="enterPVDataFailure"/>

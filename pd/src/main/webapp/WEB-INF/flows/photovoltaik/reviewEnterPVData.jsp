@@ -11,10 +11,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h1>Bitte Angaben kontrollieren</h1>
+Aktuelle ViewId: <c:out value="${flowExecutionContext.activeSession.state.id}"/>
 
-	<form:form modelAttribute="tagesertrag">
+	<form:form>
 		<div>
-			Bitte kontrollieren Sie Ihre Angaben:
 			<table>
 				<tr>
 					<td>Aktueller Zeitstempel:</td>
@@ -32,6 +33,7 @@
 					<td>Durchschnittstemperatur:</td>
 					<td>
 						<c:out value="${tagesertrag.durchschnittsTemperatur }"></c:out>
+						<c:out value="${tagesverbrauch.durchschnittsTemperatur }"></c:out>
 					</td>
 				</tr>
 				<tr>
@@ -40,11 +42,17 @@
 						<c:out value="${tagesertrag.ertrag }"></c:out>
 					</td>
 				</tr>
+				<tr>
+					<td>Tagesverbrauch:</td>
+					<td>
+						<c:out value="${tagesverbrauch.gebrauchteKWH}"></c:out>
+					</td>
+				</tr>
 			</table>
 		</div>
 		<div>
 			<input type="submit" name="_eventId_submit" value="weiter"/>
-			<input type="submit" name="_eventId_cancel" value="abbrechen" />
+			<input type="submit" name="_eventId_back" value="abbrechen" />
 		</div>
 	</form:form>
 </body>

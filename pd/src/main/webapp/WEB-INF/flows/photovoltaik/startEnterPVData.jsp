@@ -15,9 +15,12 @@
 </head>
 
 <body>
-	Der durch den Mehtodenaufruf setInitValues() ermittelte Wochentag: <c:out value="${tagesertrag.weekDay }"></c:out><br>
-	und der aktuelle Zeitstempel: <c:out value="${tagesertrag.currentDateAndTime }"></c:out>.
+	<b>Aufruf setInitValues():</b><br>
+	Ermittelte Wochentag: <c:out value="${tagesertrag.weekDay }"></c:out><br>
+	Zeitstempel: <c:out value="${tagesertrag.currentDateAndTime }"></c:out>
 
+	<h1>Tagesertrag</h1>
+	Aktuelle ViewId: <c:out value="${flowExecutionContext.activeSession.state.id}"/>
 	<form:form modelAttribute="tagesertrag">
 		<div>
 			<table>
@@ -28,15 +31,6 @@
 				<tr>
 					<td colspan="2">
 						<form:errors path="ertrag" cssClass="error"/>
-					</td>
-				</tr>
-				<tr>
-					<td>Bitte geben Sie die heutige Durchschnittstemperatur ein:</td>
-					<td><form:input path="durchschnittsTemperatur"/></td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<form:errors path="durchschnittsTemperatur" cssClass="error"/>
 					</td>
 				</tr>
 			</table>

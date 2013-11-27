@@ -141,10 +141,10 @@ public class DataAccessObjectImpl implements DataAccessObject {
 		try {
 			query = "INSERT INTO pd_spring.tagesertrag (" + "id,"
 					+ "currentDateAndTime," + "durchschnittsTemperatur,"
-					+ "weekDay," + "ertrag" + ")" + "VALUES (" + "NULL ,"
-					+ tagesertrag.getCurrentDateAndTime() + ","
-					+ tagesertrag.getDurchschnittsTemperatur() + ","
-					+ tagesertrag.getWeekDay() + "," + tagesertrag.getErtrag()
+					+ "weekDay," + "ertrag" + ")" + "VALUES (" + "NULL ,'"
+					+ tagesertrag.getCurrentDateAndTime() + "',"
+					+ tagesertrag.getDurchschnittsTemperatur() + ",'"
+					+ tagesertrag.getWeekDay() + "'," + tagesertrag.getErtrag()
 					+ ")";
 
 			connection = dataSource.getConnection();
@@ -153,6 +153,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
 			result = "success";
 		} catch (Exception e) {
 			logger.error(e.getMessage());
+			logger.error(query);
 		} finally {
 			DbUtils.closeQuietly(connection, ps, rs);
 		}
@@ -175,9 +176,9 @@ public class DataAccessObjectImpl implements DataAccessObject {
 			query = "INSERT INTO pd_spring.tagesverbrauch (" + "id,"
 					+ "currentDateAndTime," + "durchschnittsTemperatur,"
 					+ "weekDay," + "gebrauchteKWH" + ")" + "VALUES ("
-					+ "NULL ," + tagesverbrauch.getCurrentDateAndTime() + ","
-					+ tagesverbrauch.getDurchschnittsTemperatur() + ","
-					+ tagesverbrauch.getWeekDay() + ","
+					+ "NULL ,'" + tagesverbrauch.getCurrentDateAndTime() + "',"
+					+ tagesverbrauch.getDurchschnittsTemperatur() + ",'"
+					+ tagesverbrauch.getWeekDay() + "',"
 					+ tagesverbrauch.getGebrauchteKWH() + ")";
 
 			connection = dataSource.getConnection();
