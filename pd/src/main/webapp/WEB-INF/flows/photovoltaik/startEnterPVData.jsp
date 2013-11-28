@@ -25,12 +25,21 @@
 		<div>
 			<table>
 				<tr>
-					<td>Bitte geben Sie den heutigen Ertrag ein:</td>
+					<td>Bitte geben Sie den heute eingespeisten Ertrag ein:</td>
 					<td><form:input path="ertrag"/></td>
 				</tr>
 				<tr>
 					<td colspan="2">
 						<form:errors path="ertrag" cssClass="error"/>
+					</td>
+				</tr>
+				<tr>
+					<td>Bitte geben Sie die heutige Durchschnittstemperatur ein:</td>
+					<td><form:input path="durchschnittsTemperatur"/></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<form:errors path="durchschnittsTemperatur" cssClass="error"/>
 					</td>
 				</tr>
 			</table>

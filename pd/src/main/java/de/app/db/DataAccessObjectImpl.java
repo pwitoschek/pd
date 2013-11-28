@@ -6,6 +6,7 @@ package de.app.db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +26,7 @@ import org.springframework.webflow.execution.Event;
 import de.app.interfaces.DataAccessObject;
 import de.app.pd.entities.pv.Tagesertrag;
 import de.app.pd.entities.pv.Tagesverbrauch;
+import de.app.utilities.DBException;
 
 /**
  * @author Peter
@@ -161,7 +163,8 @@ public class DataAccessObjectImpl implements DataAccessObject {
 	}
 
 	/*
-	 * (non-Javadoc)
+	 * (non-Javadoc) Diese Methode wirft im Fehlerfall eine DBException Diese
+	 * Exception wird benötigt, da im Flow darauf reagiert wird
 	 * 
 	 * @see de.app.interfaces.DataAccessObject#addTagesverbrauch()
 	 */
@@ -185,8 +188,14 @@ public class DataAccessObjectImpl implements DataAccessObject {
 			ps = connection.prepareStatement(query);
 			ps.execute();
 			result = true;
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			logger.error(e.getMessage());
+			try {
+				throw new DBException();
+			} catch (DBException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		} finally {
 			DbUtils.closeQuietly(connection, ps, rs);
 		}
