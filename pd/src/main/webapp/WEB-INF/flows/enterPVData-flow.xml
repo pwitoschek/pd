@@ -4,14 +4,14 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
 	http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd"
 	start-state="startEnterPVData">
+	
+	<on-start>
+		<evaluate expression="new de.app.pd.entities.pv.Tagesertrag()" result="flowScope.tagesertrag"/>
+		<evaluate expression="new de.app.pd.entities.pv.Tagesverbrauch()" result="flowScope.tagesverbrauch"/>
+	</on-start>
 
 	<view-state id="startEnterPVData"
 		view="/WEB-INF/flows/photovoltaik/startEnterPVData.jsp" model="flowScope.tagesertrag">
-		<!-- muss ich hier überhaupt Beans als Variablen deklarieren?! das sollte
-			 doch der Spring Container automatisch injizieren?!
-			 -->
-		<var name="flowScope.tagesertrag" class="de.app.pd.entities.pv.Tagesertrag"/>
-		<var name="flowScope.tagesverbrauch" class="de.app.pd.entities.pv.Tagesverbrauch"/>
 		<on-entry>
 			<evaluate expression="tagesertrag.setInitValues()" result="flowScope.tagesertrag" />
 		</on-entry>

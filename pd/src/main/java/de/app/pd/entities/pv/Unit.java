@@ -18,7 +18,7 @@ public abstract class Unit implements Serializable {
 	private static final long serialVersionUID = -6408427900445775413L;
 	private String weekDay;
 	private Date currentDateAndTime;
-	private Double durchschnittsTemperatur;
+	private double durchschnittsTemperatur;
 
 	public Unit setInitValues() {
 		Calendar calendar = new GregorianCalendar();

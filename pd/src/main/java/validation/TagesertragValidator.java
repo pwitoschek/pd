@@ -25,7 +25,7 @@ public class TagesertragValidator {
 
 	public void validateStartEnterPVData(Tagesertrag tagesertrag, Errors errors) {
 
-		if (StringUtils.isNullOrEmpty(tagesertrag.getErtrag().toString())) {
+		if (StringUtils.isNullOrEmpty(String.valueOf(tagesertrag.getErtrag()))) {
 			errors.rejectValue("ertrag", "tagesertrag.ertragleer",
 					"Bitte geben Sie einen Ertrag ein!");
 		}

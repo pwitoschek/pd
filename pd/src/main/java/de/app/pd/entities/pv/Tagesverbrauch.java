@@ -34,10 +34,7 @@ public class Tagesverbrauch extends Unit implements Serializable {
 	 */
 	public void validateEnterVerbrauch(ValidationContext context) {
 		MessageContext messages = context.getMessageContext();
-		// So sollte man es NICHT machen!
-		String durchschnittsTemperatur = String
-				.valueOf(getDurchschnittsTemperatur());
-		if (durchschnittsTemperatur == "null") {
+		if (getDurchschnittsTemperatur() == null) {
 			messages.addMessage(new MessageBuilder()
 					.error()
 					.source("durchschnittsTemperatur")

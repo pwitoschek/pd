@@ -2,51 +2,71 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Start Enter PV Data</title>
-	<style type="text/css">
-		.error{
-			color:red;
-		}
-	</style>
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
 </head>
-
 <body>
-	<b>Aufruf setInitValues():</b><br>
-	Ermittelte Wochentag: <c:out value="${tagesertrag.weekDay }"></c:out><br>
-	Zeitstempel: <c:out value="${tagesertrag.currentDateAndTime }"></c:out>
-
-	<h1>Tagesertrag</h1>
-	Aktuelle ViewId: <c:out value="${flowExecutionContext.activeSession.state.id}"/>
+	<h1>Schritt 1: Tagesertrag</h1>
+	<form:errors path="*"/>
 	<form:form modelAttribute="tagesertrag">
 		<div>
 			<table>
 				<tr>
-					<td>Bitte geben Sie den heute eingespeisten Ertrag ein:</td>
-					<td><form:input path="ertrag"/></td>
+					<td colspan="2">
+						<h2>Allgemeine Angaben zum Tagesertrag</h2>
+					</td>
+				</tr>
+				<tr>
+					<td>Aktueller Zeitstempel</td>
+					<td><form:input path="currentDateAndTime" /></td>
+				</tr>
+				<tr>
+					<td colspan="2"><form:errors path="currentDateAndTime"
+							cssClass="error" /></td>
+				</tr>
+				<tr>
+					<td>Wochentag</td>
+					<td><form:input path="weekDay" /></td>
+				</tr>
+				<tr>
+					<td colspan="2"><form:errors path="weekDay" cssClass="error" />
+					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<form:errors path="ertrag" cssClass="error"/>
+						<h2>Spezifischen Angaben zum Ertrag</h2>
+					</td>
+				</tr>
+				<tr>
+					<td>Bitte geben Sie den heute eingespeisten Ertrag ein:</td>
+					<td><form:input path="ertrag" /></td>
+				</tr>
+				<tr>
+					<td colspan="2"><form:errors path="ertrag" cssClass="error" />
 					</td>
 				</tr>
 				<tr>
 					<td>Bitte geben Sie die heutige Durchschnittstemperatur ein:</td>
-					<td><form:input path="durchschnittsTemperatur"/></td>
+					<td><form:input path="durchschnittsTemperatur" /></td>
 				</tr>
 				<tr>
-					<td colspan="2">
-						<form:errors path="durchschnittsTemperatur" cssClass="error"/>
-					</td>
+					<td colspan="2"><form:errors path="durchschnittsTemperatur"
+							cssClass="error" /></td>
 				</tr>
 			</table>
 		</div>
 		<div>
-			<input type="submit" name="_eventId_submit" value="weiter"/>
-			<input type="submit" name="_eventId_cancel" value="abbrechen" />
+			<input type="submit" name="_eventId_submit" value="weiter" /> <input
+				type="submit" name="_eventId_cancel" value="abbrechen" />
 		</div>
 	</form:form>
 </body>

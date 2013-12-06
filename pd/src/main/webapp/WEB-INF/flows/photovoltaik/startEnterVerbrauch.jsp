@@ -15,12 +15,10 @@
 </head>
 
 <body>
-	<h1>Tagesverbrauch</h1>
-	Aktuelle ViewId: <c:out value="${flowExecutionContext.activeSession.state.id}"/>
+	<h1>Schritt 2: Tagesverbrauch</h1>
 	<form:form modelAttribute="tagesverbrauch">
 		<div>
 			<table>
-				<!-- 
 				<tr>
 					<td colspan="2">
 						<h2>Allgemeine Angaben zum Tagesverbrauch</h2>
@@ -46,7 +44,6 @@
 						<form:errors path="weekDay" cssClass="error"/>
 					</td>
 				</tr>
-				 -->
 				<tr>
 					<td colspan="2">
 						<h2>Spezifischen Angaben zum Verbrauch</h2>

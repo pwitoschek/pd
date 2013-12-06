@@ -11,8 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Bitte Angaben kontrollieren</h1>
-Aktuelle ViewId: <c:out value="${flowExecutionContext.activeSession.state.id}"/>
+<h1>Schritt 3: Bitte Angaben kontrollieren</h1>
 
 	<form:form>
 		<div>
@@ -52,7 +51,7 @@ Aktuelle ViewId: <c:out value="${flowExecutionContext.activeSession.state.id}"/>
 		</div>
 		<div>
 			<input type="submit" name="_eventId_submit" value="weiter"/>
-			<input type="submit" name="_eventId_back" value="abbrechen" />
+			<input type="submit" name="_eventId_back" value="zurueck" />
 		</div>
 	</form:form>
 </body>
