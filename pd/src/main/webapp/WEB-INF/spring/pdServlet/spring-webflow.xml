@@ -11,12 +11,12 @@
 	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
 		<property name="flowExecutor" ref="flowExecutor" />
 	</bean>
-	
-	<!-- Der loggingListener macht es möglich einen Flow zu debuggen - Diese Bean erweitert einen FlowExecutionListener
-	 -->
-	<flow:flow-executor id="flowExecutor" flow-registry="flowRegistry" >
+
+	<!-- Der loggingListener macht es möglich einen Flow zu debuggen - Diese 
+		Bean erweitert einen FlowExecutionListener -->
+	<flow:flow-executor id="flowExecutor" flow-registry="flowRegistry">
 		<flow:flow-execution-listeners>
-			<flow:listener ref="loggingListener" criteria="*"/>
+			<flow:listener ref="loggingListener" criteria="*" />
 		</flow:flow-execution-listeners>
 	</flow:flow-executor>
 
@@ -26,12 +26,18 @@
 		<property name="flowExecutor" ref="flowExecutor" />
 	</bean>
 
-	<flow:flow-registry id="flowRegistry" flow-builder-services="flowBuilderServices">
+	<flow:flow-registry id="flowRegistry"
+		flow-builder-services="flowBuilderServices">
 		<flow:flow-location-pattern value="/WEB-INF/flows/*-flow.xml" />
 	</flow:flow-registry>
 
 	<flow:flow-builder-services id="flowBuilderServices"
 		view-factory-creator="mvcViewFactoryCreator" validator="validator" conversion-service="defaultConversionService" />
+
+	<bean id="defaultConversionService"
+		class="org.springframework.binding.convert.service.DefaultConversionService">
+		<constructor-arg ref="applicationConversionService" />
+	</bean>
 
 	<bean id="validator"
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />

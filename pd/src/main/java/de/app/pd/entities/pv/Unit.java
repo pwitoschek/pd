@@ -1,12 +1,9 @@
 package de.app.pd.entities.pv;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
-import de.app.utilities.DateUtilities;
+import org.joda.time.LocalDate;
 
 /*
  * Serializable muss implementiert sein für Flows
@@ -21,9 +18,12 @@ public abstract class Unit implements Serializable {
 	private double durchschnittsTemperatur;
 
 	public Unit setInitValues() {
-		Calendar calendar = new GregorianCalendar();
-		setWeekDay(DateUtilities.getWeekDay(calendar.get(Calendar.DAY_OF_WEEK)));
-		setCurrentDateAndTime(new Timestamp(new Date().getTime()));
+		LocalDate localDate = new LocalDate();
+		localDate.dayOfWeek().getAsString();
+		// Calendar calendar = new GregorianCalendar();
+		// setWeekDay(DateUtilities.getWeekDay(calendar.get(Calendar.DAY_OF_WEEK)));
+		// setCurrentDateAndTime(new Timestamp(new Date().getTime()));
+		setWeekDay(localDate.dayOfWeek().getAsText());
 		return this;
 	}
 
