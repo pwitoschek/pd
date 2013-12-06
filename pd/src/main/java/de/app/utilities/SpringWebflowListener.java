@@ -22,6 +22,8 @@ public class SpringWebflowListener extends FlowExecutionListenerAdapter {
 	public void stateEntered(RequestContext context,
 			StateDefinition previousState, StateDefinition newState) {
 		logger.debug("Entered State:" + newState.getId());
+		context.getFlowScope().put("tabpanel", "test");
+		// context.getFlowScope().get(attributeName)
 	}
 
 	@Override

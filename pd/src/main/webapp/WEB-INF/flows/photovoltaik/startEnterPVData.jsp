@@ -35,6 +35,7 @@
 </head>
 <body>
 	<h1>Schritt 1: Tagesertrag</h1>
+	<c:import url="mainNavigation.jsp"></c:import>
 	<form:errors path="*" />
 	<form:form modelAttribute="tagesertrag">
 		<div>
