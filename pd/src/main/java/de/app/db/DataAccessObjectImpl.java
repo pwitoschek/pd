@@ -27,6 +27,7 @@ import de.app.interfaces.DataAccessObject;
 import de.app.pd.entities.pv.Tagesertrag;
 import de.app.pd.entities.pv.Tagesverbrauch;
 import de.app.utilities.DBException;
+import de.app.utilities.DateUtilities;
 
 /**
  * @author Peter
@@ -144,7 +145,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
 			query = "INSERT INTO pd_spring.tagesertrag (" + "id,"
 					+ "currentDateAndTime," + "durchschnittsTemperatur,"
 					+ "weekDay," + "ertrag" + ")" + "VALUES (" + "NULL ,'"
-					+ tagesertrag.getCurrentDateAndTime() + "',"
+					+ DateUtilities.convertDateToMySQLDate(tagesertrag) + "',"
 					+ tagesertrag.getDurchschnittsTemperatur() + ",'"
 					+ tagesertrag.getWeekDay() + "'," + tagesertrag.getErtrag()
 					+ ")";
@@ -179,8 +180,9 @@ public class DataAccessObjectImpl implements DataAccessObject {
 			query = "INSERT INTO pd_spring.tagesverbrauch (" + "id,"
 					+ "currentDateAndTime," + "durchschnittsTemperatur,"
 					+ "weekDay," + "gebrauchteKWH" + ")" + "VALUES ("
-					+ "NULL ,'" + tagesverbrauch.getCurrentDateAndTime() + "',"
-					+ tagesverbrauch.getDurchschnittsTemperatur() + ",'"
+					+ "NULL ,'"
+					+ DateUtilities.convertDateToMySQLDate(tagesverbrauch)
+					+ "'," + tagesverbrauch.getDurchschnittsTemperatur() + ",'"
 					+ tagesverbrauch.getWeekDay() + "',"
 					+ tagesverbrauch.getGebrauchteKWH() + ")";
 
