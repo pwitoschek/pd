@@ -18,7 +18,7 @@ public class ApplicationConversionServiceFactoryBean extends
 
 	@Override
 	protected void installFormatters(FormatterRegistry registry) {
-		// Register the default date formatter provided by Spring
+		// NavigationItem the default date formatter provided by Spring
 		registry.addFormatter(new DateFormatter("dd/MM/yyyy HH:mm"));
 		registry.addFormatter(new DateFormatter("yyyy-MM-dd HH:mm:ss"));
 		// registry.addFormatter(new
