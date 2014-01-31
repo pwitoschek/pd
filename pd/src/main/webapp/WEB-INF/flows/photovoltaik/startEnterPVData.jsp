@@ -36,8 +36,7 @@
 </head>
 <body>
 	<tags:navigation/>
-	<h1>Schritt 1: Tagesertrag</h1>
-	<c:import url="mainNavigation.jsp"></c:import>
+	<!--<c:import url="mainNavigation.jsp"></c:import>-->
 	<form:errors path="*" />
 	<form:form modelAttribute="tagesertrag">
 		<div>
@@ -87,8 +86,9 @@
 			</table>
 		</div>
 		<div>
-			<input type="submit" name="_eventId_submit" value="weiter" /> <input
+			<input type="submit" name="_eventId_submit" value="weiter"  /> <input
 				type="submit" name="_eventId_cancel" value="abbrechen" />
+			<input type="submit" name="_eventId_navi" value="abbrechen" />
 		</div>
 	</form:form>
 </body>

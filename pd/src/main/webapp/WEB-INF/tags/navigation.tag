@@ -1,20 +1,40 @@
 <%@ tag import="de.app.navigation.NavigationItem"%>
-<%@ tag import="de.app.navigation.Navigation" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-	Navigation nav = (Navigation)request.getSession().getAttribute("navigation");
-	
-	if (nav != null){
-		for (int i = 0; i < nav.getItemList().size(); i++){
-			NavigationItem item = nav.getItemList().get(i);
-			System.out.println(item.getName());
+<%@ tag import="de.app.navigation.Navigation"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script type="text/javascript">
+	function addHiddenElement(target) {
+		if ($('#' + target).length === 0) {
+			$("<input name='target' value='"+target+"' type='hidden' />")
+					.appendTo($('form'));
 		}
-	} else {
-		System.out.println("nav == null");
 	}
-	String test = "213";
-	System.out.println(test);
-%>
+</script>
+
 <c:forEach var="item" items="${navigation.itemList}">
-	<a href="<c:out value='${item.uri}'/>" ><c:out value='${item.name}'/></a>
+<c:choose>
+		<c:when test="${item.reachable}">
+			<c:choose>
+				<c:when test="${item.active}">
+					<div class="tab active ">
+						<input type="submit" name="_eventId_navi" value="${item.name}"
+							onclick="addHiddenElement('${item.name}')"
+							style="color: blue; font-weight: bold;" />
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="tab selectable ">
+						<input type="submit" name="_eventId_navi" value="${item.name}"
+							onclick="addHiddenElement('${item.name}')" style="color: blue;" />
+					</div>
+				</c:otherwise>
+			</c:choose>
+		</c:when>
+		<c:otherwise>
+			<div class="tab inactive ">
+				<input type="submit" name="_eventId_navi" disabled
+					value="${item.name}" onclick="addHiddenElement('${item.name}')"
+					style="color: red;" />
+			</div>
+		</c:otherwise>
+	</c:choose>
 </c:forEach>

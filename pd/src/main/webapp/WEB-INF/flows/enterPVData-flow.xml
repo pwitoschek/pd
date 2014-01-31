@@ -4,10 +4,12 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
 	http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd"
 	start-state="startEnterPVData">
-	
+
 	<on-start>
-		<evaluate expression="new de.app.pd.entities.pv.Tagesertrag()" result="flowScope.tagesertrag"/>
-		<evaluate expression="new de.app.pd.entities.pv.Tagesverbrauch()" result="flowScope.tagesverbrauch"/>
+		<evaluate expression="new de.app.pd.entities.pv.Tagesertrag()"
+			result="flowScope.tagesertrag" />
+		<evaluate expression="new de.app.pd.entities.pv.Tagesverbrauch()"
+			result="flowScope.tagesverbrauch" />
 	</on-start>
 
 	<view-state id="startEnterPVData"
@@ -17,34 +19,45 @@
 		</on-entry>
 		<transition on="submit" to="enterVerbrauch"></transition>
 		<transition on="cancel" to="startEnterPVData"></transition>
+		<transition on="navi" to="evaluateNavi"></transition>
 	</view-state>
-	
-	<view-state id="enterVerbrauch" 
+
+	<action-state id="evaluateNavi">
+		<evaluate expression="navigationEvaluation.evaluate(request)"></evaluate>
+		<transition on="success" to="enterPVDataSuccess" />
+		<transition on="failure" to="enterPVDataFailure" />
+	</action-state>
+
+	<view-state id="enterVerbrauch"
 		view="/WEB-INF/flows/photovoltaik/startEnterVerbrauch.jsp" model="flowScope.tagesverbrauch">
 		<on-entry>
-			<evaluate expression="tagesverbrauch.setInitValues()" result="flowScope.tagesverbrauch" />
+			<evaluate expression="tagesverbrauch.setInitValues()"
+				result="flowScope.tagesverbrauch" />
 		</on-entry>
 		<transition on="submit" to="reviewEnterPVData"></transition>
 		<transition on="back" to="startEnterPVData" validate="false"></transition>
 	</view-state>
 
-	<view-state id="reviewEnterPVData" view="/WEB-INF/flows/photovoltaik/reviewEnterPVData.jsp">
+	<view-state id="reviewEnterPVData"
+		view="/WEB-INF/flows/photovoltaik/reviewEnterPVData.jsp">
 		<transition on="submit" to="savePVData"></transition>
-		<transition on="back" to="enterVerbrauch" validate="false"/>
+		<transition on="back" to="enterVerbrauch" validate="false" />
 	</view-state>
-	<!-- 
-	Da es hier zwei evaluate Expressions gibt und die erste ein Event (success|failure) zurück gibt,
-	wird die zweite evaluate Expression nicht mehr ausgeführt
-	 -->
+	<!-- Da es hier zwei evaluate Expressions gibt und die erste ein Event (success|failure) 
+		zurück gibt, wird die zweite evaluate Expression nicht mehr ausgeführt -->
 	<action-state id="savePVData">
 		<evaluate expression="dataAccessObjectImpl.addTagesverbrauch(tagesverbrauch)"></evaluate>
 		<evaluate expression="dataAccessObjectImpl.addTagesertrag(tagesertrag)"></evaluate>
-		<transition on-exception="de.app.utilities.DBException" to="enterPVDataFailure"/>
-		<transition on="success" to="enterPVDataSuccess"/>
-		<transition on="failure" to="enterPVDataFailure"/>
+		<transition on-exception="de.app.utilities.DBException" to="enterPVDataFailure" />
+		<transition on="success" to="enterPVDataSuccess" />
+		<transition on="failure" to="enterPVDataFailure" />
 	</action-state>
 
-	<end-state id="enterPVDataSuccess" view="/WEB-INF/flows/photovoltaik/enterPVDataSuccess.jsp"/>
-	<end-state id="enterPVDataFailure" view="/WEB-INF/flows/photovoltaik/enterPVDataFailure.jsp"/>
+	<end-state id="enterPVDataSuccess" view="/WEB-INF/flows/photovoltaik/enterPVDataSuccess.jsp" />
+	<end-state id="enterPVDataFailure" view="/WEB-INF/flows/photovoltaik/enterPVDataFailure.jsp" />
+	
+	<global-transitions>
+		<transition on="navi" to="evaluateNavi"></transition>
+	</global-transitions>
 
 </flow>
