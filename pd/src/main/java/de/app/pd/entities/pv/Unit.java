@@ -3,6 +3,8 @@ package de.app.pd.entities.pv;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 import org.joda.time.LocalDate;
 
 /*
@@ -14,6 +16,7 @@ public abstract class Unit implements Serializable {
 	 */
 	private static final long serialVersionUID = -6408427900445775413L;
 	private String weekDay;
+	@NotNull
 	private Date currentDateAndTime;
 	private double durchschnittsTemperatur;
 

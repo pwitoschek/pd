@@ -18,7 +18,12 @@
 		<flow:flow-location-pattern value="/WEB-INF/flows/*-flow.xml"/>
 	</flow:flow-registry>
 	
-	<flow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator" validator="validator"/>
+	<flow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator" conversion-service="defaultConversionService" validator="validator"/>
+	
+	<bean id="defaultConversionService"
+		class="org.springframework.binding.convert.service.DefaultConversionService">
+		<constructor-arg ref="myFormattingFactory" />
+	</bean>
 	
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 	

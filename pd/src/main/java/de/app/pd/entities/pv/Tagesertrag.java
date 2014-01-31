@@ -5,6 +5,8 @@ package de.app.pd.entities.pv;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,8 +23,7 @@ public class Tagesertrag extends Unit implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -4453985606360922467L;
-	// javax.validation.constraint
-	// @NotNull
+	@NotNull
 	private double ertrag;
 
 	public double getErtrag() {

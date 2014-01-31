@@ -21,6 +21,8 @@ public class NavigationItem implements Serializable {
 	private String uri;
 	private String description;
 
+	private String displayName;
+
 	private boolean isActive = false;
 
 	private boolean isReachable = false;
@@ -127,5 +129,13 @@ public class NavigationItem implements Serializable {
 
 	public void setUri(String uri) {
 		this.uri = uri;
+	}
+
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
 	}
 }

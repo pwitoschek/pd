@@ -15,26 +15,20 @@
 		<c:when test="${item.reachable}">
 			<c:choose>
 				<c:when test="${item.active}">
-					<div class="tab active ">
-						<input type="submit" name="_eventId_navi" value="${item.name}"
+						<input type="submit" name="_eventId_navi" value="${item.displayName}"
 							onclick="addHiddenElement('${item.name}')"
 							style="color: blue; font-weight: bold;" />
-					</div>
 				</c:when>
 				<c:otherwise>
-					<div class="tab selectable ">
-						<input type="submit" name="_eventId_navi" value="${item.name}"
+						<input type="submit" name="_eventId_navi" value="${item.displayName}"
 							onclick="addHiddenElement('${item.name}')" style="color: blue;" />
-					</div>
 				</c:otherwise>
 			</c:choose>
 		</c:when>
 		<c:otherwise>
-			<div class="tab inactive ">
 				<input type="submit" name="_eventId_navi" disabled
-					value="${item.name}" onclick="addHiddenElement('${item.name}')"
+					value="${item.displayName}" onclick="addHiddenElement('${item.name}')"
 					style="color: red;" />
-			</div>
 		</c:otherwise>
 	</c:choose>
 </c:forEach>

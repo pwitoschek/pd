@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,7 +37,6 @@
 </head>
 <body>
 	<tags:navigation/>
-	<!--<c:import url="mainNavigation.jsp"></c:import>-->
 	<form:errors path="*" />
 	<form:form modelAttribute="tagesertrag">
 		<div>
@@ -48,11 +48,14 @@
 				</tr>
 				<tr>
 					<td>Aktueller Zeitstempel</td>
-					<td><form:input path="currentDateAndTime" id="datetimepicker" /></td>
+					<td>
+					<fmt:formatDate value="${tagesertrag.currentDateAndTime}" type="date" pattern="dd.MM.yyyy" var="currentDateAndTime" />
+						<form:input path="currentDateAndTime" id="datetimepicker" />
+					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><form:errors path="currentDateAndTime"
-							cssClass="error" /></td>
+					<td colspan="2">
+						<tags:error property="currentDateAndTime"></tags:error>
 				</tr>
 				<tr>
 					<td>Wochentag</td>
@@ -86,9 +89,8 @@
 			</table>
 		</div>
 		<div>
-			<input type="submit" name="_eventId_submit" value="weiter"  /> <input
-				type="submit" name="_eventId_cancel" value="abbrechen" />
-			<input type="submit" name="_eventId_navi" value="abbrechen" />
+			<input type="submit" name="_eventId_submit" value="weiter"  />
+			<input type="submit" name="_eventId_cancel" value="abbrechen" />
 		</div>
 	</form:form>
 </body>
