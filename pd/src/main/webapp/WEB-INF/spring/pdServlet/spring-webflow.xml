@@ -18,6 +18,7 @@
 		<flow:flow-execution-listeners>
 			<flow:listener ref="loggingListener" criteria="*" />
 		</flow:flow-execution-listeners>
+		<flow:flow-execution-repository max-executions="5" max-execution-snapshots="30"/>
 	</flow:flow-executor>
 
 	<bean id="loggingListener" class="de.app.utilities.SpringWebflowListener"></bean>
@@ -50,4 +51,5 @@
 		<property name="flowRegistry" ref="flowRegistry"></property>
 		<property name="order" value="0"></property>
 	</bean>
+
 </beans>

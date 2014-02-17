@@ -66,8 +66,15 @@
 		<transition on="success" to="#{conversationScope.target}" />
 	</action-state>
 	
+	<view-state id="error" 
+		view="/WEB-INF/flows/error/error.jsp">
+		<transition on="submit" to="savePVData"></transition>
+		<transition on="back" validate="false" bind="false" to="enterVerbrauch"/>
+	</view-state>
+	
 	<global-transitions>
 		<transition on="navi" to="evaluateNavi"></transition>
+		<transition on-exception="org.springframework.webflow.execution.repository.snapshot.SnapshotNotFoundException" to="error"></transition>
 	</global-transitions>
 
 </flow>
