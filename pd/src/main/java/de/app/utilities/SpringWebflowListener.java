@@ -229,14 +229,12 @@ public class SpringWebflowListener extends FlowExecutionListenerAdapter {
 				// View-States und Substates müssen in die Navigation übernommen
 				// werden
 				isViewState = (state.isViewState() || state instanceof SubflowState)
-						&& !state.getId().startsWith("anmeldung");
+						&& !state.getId().startsWith("error");
 				boolean isAuthentificationRequired = false;
 				int positionAntragsstreckeStart = 0;
 				if (i != 0 && i >= positionAntragsstreckeStart) {
 					isAuthentificationRequired = true;
 				}
-				isViewState = (state.isViewState() || state instanceof SubflowState)
-						&& !state.getId().startsWith("login_");
 				if (isViewState) {
 					if (state.getId().equals("anmeldung")) {
 						positionAntragsstreckeStart = ++i;
@@ -250,7 +248,8 @@ public class SpringWebflowListener extends FlowExecutionListenerAdapter {
 					}
 					item.setAuthenticationRequired(isAuthentificationRequired);
 					item.setName(stateIds[i]);
-					item.setDisplayName(PropertyUtilities.getFlowProperties(stateIds[i]));
+					item.setDisplayName(PropertyUtilities
+							.getFlowProperties(stateIds[i]));
 					items.add(item);
 				}
 			}

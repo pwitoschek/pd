@@ -75,7 +75,8 @@
 					<td><form:input path="ertrag" /></td>
 				</tr>
 				<tr>
-					<td colspan="2"><form:errors path="ertrag" cssClass="error" />
+					<td colspan="2">
+						<tags:error property="ertrag"/>
 					</td>
 				</tr>
 				<tr>
@@ -85,6 +86,13 @@
 				<tr>
 					<td colspan="2"><form:errors path="durchschnittsTemperatur"
 							cssClass="error" /></td>
+				</tr>
+				<tr>
+					<td>testttt</td>
+					<td><form:input path="test" /></td>
+				</tr>
+				<tr>
+					<td colspan="2"><tags:error property="test"/></td>
 				</tr>
 			</table>
 		</div>
