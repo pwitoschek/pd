@@ -3,12 +3,13 @@
  */
 package de.app.utilities;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author pd
@@ -17,32 +18,22 @@ import java.util.Properties;
 public class PropertyUtilities {
 
 	private final static String flowPropertyPath = "C:/Users/pd/git/pd/pd/src/main/webapp/WEB-INF/properties/flow.properties";
-
-	public static String getFlowProperties(String field) {
+	@Autowired
+	HttpServletRequest request;
+	
+	public String getFlowProperties(String field) {
 		String result = "";
 		Properties properties = new Properties();
-		BufferedInputStream stream = null;
+		InputStream is = null;
 		try {
-			stream = new BufferedInputStream(new FileInputStream(new File(
-					flowPropertyPath)));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			properties.load(stream);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			try {
-				stream.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			is = this.getClass().getClassLoader().getResourceAsStream("/Users/peterwitoschek/git/pd/pd/src/main/webapp/WEB-INF/properties/flow.properties");
+			if (is != null){
+				properties.load(is);
+				result = properties.getProperty(field);
 			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		result = properties.getProperty(field);
 		return result;
 	}
 }

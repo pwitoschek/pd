@@ -51,7 +51,7 @@ public class SpringWebflowListener extends FlowExecutionListenerAdapter {
 	 * org.springframework.webflow.definition.StateDefinition,
 	 * org.springframework.webflow.definition.StateDefinition)
 	 */
-	// Methode zum ermitteln des aktuellen Ausführungsschrittes
+	// Methode zum ermitteln des aktuellen Ausfï¿½hrungsschrittes
 	public String getCurrentExecutionStepNumber(final RequestContext context) {
 		String result = "";
 		String flowExecutionUrl = context.getFlowExecutionUrl();
@@ -69,7 +69,7 @@ public class SpringWebflowListener extends FlowExecutionListenerAdapter {
 		// TODO Auto-generated method stub
 		LOGGER.debug("viewRendering...");
 		// Speichern des aktuellen Execution Steps in die Session um bei einer
-		// Navigation über den Browser die Navigation anpassen zu können
+		// Navigation ï¿½ber den Browser die Navigation anpassen zu kï¿½nnen
 		String currentExecutionStepNumber = "";
 		if (StringUtils.isNotEmpty(context.getFlowExecutionUrl())) {
 			currentExecutionStepNumber = getCurrentExecutionStepNumber(context);
@@ -79,9 +79,9 @@ public class SpringWebflowListener extends FlowExecutionListenerAdapter {
 		}
 		Navigation nav = (Navigation) context.getConversationScope().get(
 				"navigation");
-		// Könnte sein, dass es der Einstieg ist, weshalb die Navigation noch
+		// Kï¿½nnte sein, dass es der Einstieg ist, weshalb die Navigation noch
 		// nicht in der Session als Objekt gespeichert ist.
-		// Deshalb hier an der Stelle eine null-Überprüfung
+		// Deshalb hier an der Stelle eine null-ï¿½berprï¿½fung
 		if (nav != null) {
 			for (int i = 0; i < nav.getItemList().size(); i++) {
 				NavigationItem item = nav.getItemList().get(i);
@@ -128,21 +128,21 @@ public class SpringWebflowListener extends FlowExecutionListenerAdapter {
 			context.getConversationScope()
 					.put("currentState", newState.getId());
 
-			// Falls ein Modelattribut übergeben worden ist, muss es in die
-			// Session gespeichert werden um später
+			// Falls ein Modelattribut ï¿½bergeben worden ist, muss es in die
+			// Session gespeichert werden um spï¿½ter
 			// festzustellen ob ein Sprung nach "vorne" in der Navigation
 			// erlaubt ist
 
 			// Aktuell wird im Formular das Hidden-Input Feld unter dem Key
-			// "formModel" übergeben um den Namen des Models des Formulars zu
+			// "formModel" ï¿½bergeben um den Namen des Models des Formulars zu
 			// kennen
-			// Mit dem Namen lässt sich über den Flow Scope und dessen
+			// Mit dem Namen lï¿½sst sich ï¿½ber den Flow Scope und dessen
 			// AttributeMap auf das Model zugreifen und
 			// in der Session unter dem Key "model" speichern um bei der
 			// (submit)Transition das aktuelle Model mit dem abgesendeten Model
 			// zu vergleichen
-			// je nachdem ob etwas am Model geändert worden ist, darf der Kunde
-			// dann an die gewünschte Stelle navigieren.
+			// je nachdem ob etwas am Model geï¿½ndert worden ist, darf der Kunde
+			// dann an die gewï¿½nschte Stelle navigieren.
 			if (context.getCurrentState() != null
 					&& context.getCurrentState().getAttributes().size() > 0) {
 				// Hier findet man unter dem Key "model" den im View-State
@@ -169,16 +169,16 @@ public class SpringWebflowListener extends FlowExecutionListenerAdapter {
 			// Navigation aktualisieren - sofern der newState kein SubFlowState
 			// ist
 			// Bei einem Subflow wird eine neue FlowSession gestartet und die
-			// Navigation deren würde nur genau die States aus dem Subflow
+			// Navigation deren wï¿½rde nur genau die States aus dem Subflow
 			// enthalten
 			// Falls der aktuelle Flow einen Parent hat, ist es ein Subflow und
 			// die Navigation darf nicht aktualisiert werden
 			if (!(newState instanceof SubflowState)) {
 				Navigation nav = (Navigation) context.getConversationScope()
 						.get("navigation");
-				// Könnte sein, dass es der Einstieg ist, weshalb die Navigation
+				// Kï¿½nnte sein, dass es der Einstieg ist, weshalb die Navigation
 				// noch nicht in der Session als Objekt gespeichert ist.
-				// Deshalb hier an der Stelle eine null-Überprüfung
+				// Deshalb hier an der Stelle eine null-ï¿½berprï¿½fung
 				if (nav != null) {
 					for (int i = 0; i < nav.getItemList().size(); i++) {
 						NavigationItem item = nav.getItemList().get(i);
@@ -226,7 +226,7 @@ public class SpringWebflowListener extends FlowExecutionListenerAdapter {
 				StateDefinition state = context.getActiveFlow().getState(
 						stateIds[i]);
 
-				// View-States und Substates müssen in die Navigation übernommen
+				// View-States und Substates mï¿½ssen in die Navigation ï¿½bernommen
 				// werden
 				isViewState = (state.isViewState() || state instanceof SubflowState)
 						&& !state.getId().startsWith("error");
@@ -248,8 +248,7 @@ public class SpringWebflowListener extends FlowExecutionListenerAdapter {
 					}
 					item.setAuthenticationRequired(isAuthentificationRequired);
 					item.setName(stateIds[i]);
-					item.setDisplayName(PropertyUtilities
-							.getFlowProperties(stateIds[i]));
+					item.setDisplayName(new PropertyUtilities().getFlowProperties(stateIds[i]));
 					items.add(item);
 				}
 			}
