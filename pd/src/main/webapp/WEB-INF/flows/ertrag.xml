@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flow="http://www.springframework.org/schema/webflow-config"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+	http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd"
+	start-state="startEnterPVData">
+
+	<on-start>
+		<evaluate expression="new de.app.pd.entities.pv.Tagesertrag()"
+			result="flowScope.tagesertrag" />
+	</on-start>
+
+	<view-state id="startEnterPVData"
+		view="/WEB-INF/flows/photovoltaik/ertrag/startEnterPVData.jsp" model="flowScope.tagesertrag">
+		<on-entry>
+			<evaluate expression="tagesertrag.setInitValues()" result="flowScope.tagesertrag" />
+		</on-entry>
+		<transition on="submit" to="reviewEnterPVData"></transition>
+		<transition on="cancel" validate="false" to="startEnterPVData"></transition>
+		<transition on="navi" to="evaluateNavi"></transition>
+	</view-state>
+
+	<view-state id="reviewEnterPVData" 
+		view="/WEB-INF/flows/photovoltaik/ertrag/reviewEnterPVData.jsp">
+		<transition on="submit" to="savePVData"></transition>
+		<transition on="back" validate="false" bind="false" to="startEnterPVData"/>
+	</view-state>
+	
+	<!-- Da es hier zwei evaluate Expressions gibt und die erste ein Event (success|failure) 
+		zurück gibt, wird die zweite evaluate Expression nicht mehr ausgeführt -->
+	<action-state id="savePVData">
+		<evaluate expression="dataAccessObjectImpl.addTagesertrag(tagesertrag)"></evaluate>
+		<transition on-exception="de.app.utilities.DBException" to="enterPVDataFailure" />
+		<transition on="success" to="enterPVDataSuccess" />
+		<transition on="failure" to="enterPVDataFailure" />
+	</action-state>
+
+	<end-state id="enterPVDataSuccess"
+		view="/WEB-INF/flows/photovoltaik/ertrag/enterPVDataSuccess.jsp" />
+	<end-state id="enterPVDataFailure"
+		view="/WEB-INF/flows/photovoltaik/ertrag/enterPVDataFailure.jsp" />
+		
+	<action-state id="evaluateNavi">
+		<on-entry>
+			<set name="conversationScope.target" value="requestParameters.target"></set>
+			<set name="requestScope.definition" value="flowExecutionContext.definition"></set>
+			<set name="requestScope.activeSession" value="flowExecutionContext.activeSession"></set>
+			<set name="requestScope.key" value="flowExecutionContext.key"></set>
+		</on-entry>
+		<evaluate
+			expression="navigationEvaluation.evaluate(activeSession, conversationScope.target, key, definition, currentEvent)"
+			result=""></evaluate>
+		<transition on="success" to="#{conversationScope.target}" />
+	</action-state>
+	
+	<view-state id="error" 
+		view="/WEB-INF/flows/error/error.jsp">
+		<transition on="submit" to="savePVData"></transition>
+		<transition on="back" validate="false" bind="false" to="enterVerbrauch"/>
+	</view-state>
+	
+	<global-transitions>
+		<transition on="navi" to="evaluateNavi"></transition>
+		<transition on-exception="org.springframework.webflow.execution.repository.snapshot.SnapshotNotFoundException" to="error"></transition>
+	</global-transitions>
+
+</flow>

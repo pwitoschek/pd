@@ -29,7 +29,7 @@
 
 	<flow:flow-registry id="flowRegistry"
 		flow-builder-services="flowBuilderServices">
-		<flow:flow-location-pattern value="/WEB-INF/flows/*-flow.xml" />
+		<flow:flow-location-pattern value="/WEB-INF/flows/*.xml" />
 	</flow:flow-registry>
 
 	<flow:flow-builder-services id="flowBuilderServices"

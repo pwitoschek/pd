@@ -6,7 +6,7 @@ import java.util.Date;
 import org.joda.time.LocalDate;
 
 /*
- * Serializable muss implementiert sein für Flows
+ * Serializable muss implementiert sein fï¿½r Flows
  */
 public abstract class Unit implements Serializable {
 	/**
@@ -16,7 +16,7 @@ public abstract class Unit implements Serializable {
 	private String weekDay;
 	// @NotNull
 	private Date currentDateAndTime;
-	private double durchschnittsTemperatur;
+	private Double durchschnittsTemperatur;
 
 	public Unit setInitValues() {
 		LocalDate localDate = new LocalDate();

@@ -3,10 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script type="text/javascript">
 	function addHiddenElement(target) {
-		if ($('#' + target).length === 0) {
+		console.info(target);
+		console.info($('#pageForm'));
 			$("<input name='target' value='"+target+"' type='hidden' />")
-					.appendTo($('form'));
-		}
+					.appendTo($('#pageForm'));
 	}
 </script>
 

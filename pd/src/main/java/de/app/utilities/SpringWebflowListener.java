@@ -248,7 +248,7 @@ public class SpringWebflowListener extends FlowExecutionListenerAdapter {
 					}
 					item.setAuthenticationRequired(isAuthentificationRequired);
 					item.setName(stateIds[i]);
-					item.setDisplayName(new PropertyUtilities().getFlowProperties(stateIds[i]));
+					item.setDisplayName(new PropertyUtilities().getFlowProperties(definition.getId() , stateIds[i]));
 					items.add(item);
 				}
 			}

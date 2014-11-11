@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
 <title>Start Enter PV Data</title>
 <link type="text/css" rel="stylesheet"
 	href="resources/css/ui-lightness/jquery-ui-1.10.3.custom.css">
@@ -80,19 +81,12 @@
 					</td>
 				</tr>
 				<tr>
-					<td>Bitte geben Sie die heutige Durchschnittstemperatur ein:</td>
+					<td>Bitte geben Sie die heutige Durchschnittstemperatur ein (optional):</td>
 					<td><form:input path="durchschnittsTemperatur" /></td>
 				</tr>
 				<tr>
 					<td colspan="2"><form:errors path="durchschnittsTemperatur"
 							cssClass="error" /></td>
-				</tr>
-				<tr>
-					<td>testttt</td>
-					<td><form:input path="test" /></td>
-				</tr>
-				<tr>
-					<td colspan="2"><tags:error property="test"/></td>
 				</tr>
 			</table>
 		</div>

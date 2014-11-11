@@ -3,13 +3,10 @@
  */
 package de.app.utilities;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author pd
@@ -18,16 +15,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class PropertyUtilities {
 
 	private final static String flowPropertyPath = "C:/Users/pd/git/pd/pd/src/main/webapp/WEB-INF/properties/flow.properties";
-	@Autowired
-	HttpServletRequest request;
-	
-	public String getFlowProperties(String field) {
+
+	public String getFlowProperties(String definition, String field) {
 		String result = "";
 		Properties properties = new Properties();
 		InputStream is = null;
 		try {
-			is = this.getClass().getClassLoader().getResourceAsStream("/Users/peterwitoschek/git/pd/pd/src/main/webapp/WEB-INF/properties/flow.properties");
-			if (is != null){
+			if (definition.equals("ertrag")) {
+				// is =
+				// this.getClass().getClassLoader().getResourceAsStream("/Users/peterwitoschek/git/pd/pd/src/main/webapp/WEB-INF/properties/flow.properties");
+				is = new FileInputStream(
+						"/Users/peterwitoschek/git/pd/pd/src/main/webapp/WEB-INF/properties/flow.properties");
+				// is =
+				// Thread.currentThread().getContextClassLoader().getResourceAsStream("/WEB-INF/properties/flow.properties");
+			}
+			if (is != null) {
 				properties.load(is);
 				result = properties.getProperty(field);
 			}

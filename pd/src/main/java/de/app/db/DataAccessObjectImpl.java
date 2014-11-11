@@ -38,7 +38,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
 
 	// Da es hier nur eine eine Implementierung dieses Interfaces gibt,
 	// wird automatisch die richtige Implementierung des Interfaces eingebunden.
-	// Hier mache ich aber einen großen Fehler, indem die Connection in dem
+	// Hier mache ich aber einen groï¿½en Fehler, indem die Connection in dem
 	// Interface geschlossen wird
 	@Autowired
 	DataSource dataSource;
@@ -46,7 +46,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
 	private static Log4JLogger logger = new Log4JLogger();
 
 	/*
-	 * Diese Methode gibt alle gespeicherten Tageserträge zurück Es wird noch
+	 * Diese Methode gibt alle gespeicherten Tagesertrï¿½ge zurï¿½ck Es wird noch
 	 * ermittelt
 	 */
 	@Override
@@ -132,9 +132,9 @@ public class DataAccessObjectImpl implements DataAccessObject {
 	 */
 	@Override
 	public Event addTagesertrag(Tagesertrag tagesertrag) {
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("testAttribute", "test1");
-		AttributeMap attributeMap = new LocalAttributeMap(map);
+		AttributeMap<Object> attributeMap = new LocalAttributeMap<Object>(map);
 
 		String result = "failure";
 		Connection connection = null;
@@ -165,7 +165,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
 
 	/*
 	 * (non-Javadoc) Diese Methode wirft im Fehlerfall eine DBException Diese
-	 * Exception wird benötigt, da im Flow darauf reagiert wird
+	 * Exception wird benï¿½tigt, da im Flow darauf reagiert wird
 	 * 
 	 * @see de.app.interfaces.DataAccessObject#addTagesverbrauch()
 	 */

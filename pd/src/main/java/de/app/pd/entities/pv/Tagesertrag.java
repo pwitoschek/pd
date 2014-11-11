@@ -6,7 +6,6 @@ package de.app.pd.entities.pv;
 import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
 
@@ -14,8 +13,8 @@ import org.springframework.stereotype.Component;
  * @author Peter
  */
 /*
- * Alle Entities (UND deren Basisklassen) müssen serialisierbar sein, damit
- * diese in Flows verwendet werden können.
+ * Alle Entities (UND deren Basisklassen) mï¿½ssen serialisierbar sein, damit
+ * diese in Flows verwendet werden kï¿½nnen.
  */
 @Component
 public class Tagesertrag extends Unit implements Serializable {
@@ -23,28 +22,19 @@ public class Tagesertrag extends Unit implements Serializable {
 	/**
 	 * 
 	 */
-	@Size(min = 2)
-	private String test;
 
 	private static final long serialVersionUID = -4453985606360922467L;
 	@NotNull
-	private double ertrag;
+	private Double ertrag;
 
-	public double getErtrag() {
+	public Double getErtrag() {
 		return ertrag;
 	}
 
-	public void setErtrag(double ertrag) {
+	public void setErtrag(Double ertrag) {
 		this.ertrag = ertrag;
 	}
 
-	public String getTest() {
-		return test;
-	}
-
-	public void setTest(String test) {
-		this.test = test;
-	}
 
 	// public Event addTagesertrag(Tagesertrag tagesertrag) {
 	// Map<String, String> map = new HashMap<String, String>();

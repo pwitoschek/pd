@@ -18,7 +18,7 @@ import org.springframework.webflow.execution.RequestContextHolder;
  * Zentrale Stelle um den Sprung in der Navigationsleiste zu validieren. </br>
  * <a href=
  * "http://docs.spring.io/spring-webflow/docs/2.0.x/reference/htmlsingle/spring-webflow-reference.html#el-variables"
- * >Spring EL-Variablen</a> zeigt mögliche Übergabeparameter in den ActionStates
+ * >Spring EL-Variablen</a> zeigt mï¿½gliche ï¿½bergabeparameter in den ActionStates
  */
 @Component
 public class NavigationEvaluation {
@@ -28,7 +28,7 @@ public class NavigationEvaluation {
 
 	/**
 	 * Diese Methode validiert die Navigation - ist ein Sprung auf das
-	 * gewünschte Ziel überhaupt erlaubt bzw. wurde das Model verändert?!
+	 * gewï¿½nschte Ziel ï¿½berhaupt erlaubt bzw. wurde das Model verï¿½ndert?!
 	 * 
 	 * @param session
 	 * @param targetViewState
@@ -43,6 +43,7 @@ public class NavigationEvaluation {
 		String result = "success";
 		RequestContext ctx = RequestContextHolder.getRequestContext();
 		MutableAttributeMap<Object> scope = ctx.getConversationScope();
+		Object object = scope.get("target");
 		String previousState = (String) scope.get("previousState");
 		boolean mustCompareModels = false;
 		boolean modelChanged = false;
@@ -65,15 +66,15 @@ public class NavigationEvaluation {
 			LOGGER.debug(e.toString());
 		}
 
-		// Falls die gewünschte View (mind. 2 Positionen) vor der aktuellen View
+		// Falls die gewï¿½nschte View (mind. 2 Positionen) vor der aktuellen View
 		// liegt, muss das Model validiert werden
 		mustCompareModels = positionTargetState > positionPreviousState + 1;
 
 		// Falls das aktuelle Model von dem SessionModel abweicht, ist das ein
-		// Indiz, dass der Kunde etwas geändert hat,
-		// weshalb er "nur" auf die nächste View navigieren darf
+		// Indiz, dass der Kunde etwas geï¿½ndert hat,
+		// weshalb er "nur" auf die nï¿½chste View navigieren darf
 		if (mustCompareModels) {
-			// Zwischengespeicherte Model (als String-Repräsentation - zum
+			// Zwischengespeicherte Model (als String-Reprï¿½sentation - zum
 			// einfacheren Vergleich)
 			// in der Session (eventuell alter Stand - muss mit aktuellen
 			// abgeglichen werden)
@@ -85,7 +86,7 @@ public class NavigationEvaluation {
 			String sessionModelString = (String) scope.get("oldModel");
 			modelChanged = !currentModelString.equals(sessionModelString);
 		}
-		// Auf nächstes View navigieren, falls sich das Model geändert hat und
+		// Auf nï¿½chstes View navigieren, falls sich das Model geï¿½ndert hat und
 		// ein in der Navigation weiter vorne liegendes Tab angefordert worden
 		// ist
 		if (mustCompareModels && modelChanged && nav != null) {
