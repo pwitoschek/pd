@@ -25,9 +25,12 @@ public class PropertyUtilities {
 				// is =
 				// this.getClass().getClassLoader().getResourceAsStream("/Users/peterwitoschek/git/pd/pd/src/main/webapp/WEB-INF/properties/flow.properties");
 				is = new FileInputStream(
-						"/Users/peterwitoschek/git/pd/pd/src/main/webapp/WEB-INF/properties/flow.properties");
+						"/Users/peterwitoschek/git/pd/pd/src/main/webapp/WEB-INF/properties/ertrag.properties");
 				// is =
 				// Thread.currentThread().getContextClassLoader().getResourceAsStream("/WEB-INF/properties/flow.properties");
+			} else if (definition.equals("entwicklung")) {
+				is = new FileInputStream(
+						"/Users/peterwitoschek/git/pd/pd/src/main/webapp/WEB-INF/properties/entwicklung.properties");
 			}
 			if (is != null) {
 				properties.load(is);

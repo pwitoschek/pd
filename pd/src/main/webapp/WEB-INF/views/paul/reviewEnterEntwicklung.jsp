@@ -9,12 +9,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Übersicht Ertrag</title>
+<title>Kontrolle der allgemeinen Angaben</title>
 </head>
 <body>
-<h1>Schritt 3: Bitte Angaben kontrollieren</h1>
+<h1>Schritt 2: Bitte Angaben kontrollieren</h1>
 
-	<form:form id="pageForm">
+	<form:form>
 	<tags:navigation/>
 		<div>
 			<table>
@@ -37,14 +37,18 @@
 						<c:out value="${tagesverbrauch.durchschnittsTemperatur }"></c:out>
 					</td>
 				</tr>
-				 <c:if test='${not empty "${tagesertrag.ertrag}"}'>
-					<tr>
-						<td>Tagesertrag:</td>
-						<td>
-							<c:out value="${tagesertrag.ertrag }"></c:out>
-						</td>
-					</tr>
-				</c:if>
+				<tr>
+					<td>Tagesertrag:</td>
+					<td>
+						<c:out value="${tagesertrag.ertrag }"></c:out>
+					</td>
+				</tr>
+				<tr>
+					<td>Tagesverbrauch:</td>
+					<td>
+						<c:out value="${tagesverbrauch.gebrauchteKWH}"></c:out>
+					</td>
+				</tr>
 			</table>
 		</div>
 		<div>

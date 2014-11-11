@@ -16,6 +16,7 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.DbUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.impl.Log4JLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -65,8 +66,14 @@ public class DataAccessObjectImpl implements DataAccessObject {
 
 				tempTagesertrag.setCurrentDateAndTime(new SimpleDateFormat()
 						.parse(rs.getString("currentDateAndTime")));
-				tempTagesertrag.setDurchschnittsTemperatur(Double
-						.parseDouble(rs.getString("durchSchnittsTemperatur")));
+				if (StringUtils.isNotEmpty(rs
+						.getString("durchSchnittsTemperatur"))) {
+					tempTagesertrag.setDurchschnittsTemperatur(0.0);
+				} else {
+					tempTagesertrag.setDurchschnittsTemperatur(Double
+							.parseDouble(rs
+									.getString("durchSchnittsTemperatur")));
+				}
 				tempTagesertrag.setWeekDay(rs.getString("weekDay"));
 				tempTagesertrag
 						.setErtrag(Double.valueOf(rs.getString("ertrag")));

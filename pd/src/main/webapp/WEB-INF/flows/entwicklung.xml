@@ -3,41 +3,41 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flow="http://www.springframework.org/schema/webflow-config"
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
 	http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd"
-	start-state="startEnterPVData">
+	start-state="startEnterEntwicklung">
 
 	<on-start>
-		<evaluate expression="new de.app.pd.entities.pv.Tagesertrag()"
-			result="flowScope.tagesertrag" />
+		<evaluate expression="new de.app.pd.entities.paul.Entwicklung()"
+			result="flowScope.entwicklung" />
 	</on-start>
 
-	<view-state id="startEnterPVData"
-		view="/WEB-INF/views/photovoltaik/ertrag/startEnterPVData.jsp" model="flowScope.tagesertrag">
+	<view-state id="startEnterEntwicklung"
+		view="/WEB-INF/views/paul/startEnterEntwicklung.jsp" model="flowScope.entwicklung">
 		<on-entry>
-			<evaluate expression="tagesertrag.setInitValues()" result="flowScope.tagesertrag" />
+			<evaluate expression="entwicklung.setInitValues()" result="flowScope.entwicklung" />
 		</on-entry>
-		<transition on="submit" to="reviewEnterPVData"></transition>
-		<transition on="cancel" validate="false" to="startEnterPVData"></transition>
+		<transition on="submit" to="reviewEnterEnticklung"></transition>
+		<transition on="cancel" validate="false" to="startEnterEntwicklung"></transition>
 		<transition on="navi" to="evaluateNavi"></transition>
 	</view-state>
 
-	<view-state id="reviewEnterPVData" 
-		view="/WEB-INF/views/photovoltaik/ertrag/reviewEnterPVData.jsp">
-		<transition on="submit" to="savePVData"></transition>
-		<transition on="back" validate="false" bind="false" to="startEnterPVData"/>
+	<view-state id="reviewEnterEnticklung" 
+		view="/WEB-INF/views/paul/reviewEnterEnticklung.jsp">
+		<transition on="submit" to="saveData"></transition>
+		<transition on="back" validate="false" bind="false" to="startEnterEntwicklung"/>
 	</view-state>
 	
 	<!-- Da es hier zwei evaluate Expressions gibt und die erste ein Event (success|failure) 
 		zurück gibt, wird die zweite evaluate Expression nicht mehr ausgeführt -->
-	<action-state id="savePVData">
-		<evaluate expression="dataAccessObjectImpl.addTagesertrag(tagesertrag)"></evaluate>
-		<transition on-exception="de.app.utilities.DBException" to="enterPVDataFailure" />
-		<transition on="success" to="enterPVDataSuccess" />
-		<transition on="failure" to="enterPVDataFailure" />
+	<action-state id="saveData">
+		<evaluate expression="dataAccessObjectImpl.addEntwicklung(entwicklung)"></evaluate>
+		<transition on-exception="de.app.utilities.DBException" to="enterDataFailure" />
+		<transition on="success" to="enterDataSuccess" />
+		<transition on="failure" to="enterDataFailure" />
 	</action-state>
 
-	<end-state id="enterPVDataSuccess"
+	<end-state id="enterDataSuccess"
 		view="/WEB-INF/views/photovoltaik/ertrag/enterPVDataSuccess.jsp" />
-	<end-state id="enterPVDataFailure"
+	<end-state id="enterDataFailure"
 		view="/WEB-INF/views/photovoltaik/ertrag/enterPVDataFailure.jsp" />
 		
 	<action-state id="evaluateNavi">
