@@ -3,6 +3,7 @@ package de.app.pd.entities.paul;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.joda.time.LocalDate;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,6 +21,17 @@ public class Entwicklung implements Serializable {
 	private boolean wickeln;
 	private String bemerkung;
 	private String stillenBemerkung;
+	private String weekDay;
+
+	public Entwicklung setInitValues() {
+		LocalDate localDate = new LocalDate();
+		localDate.dayOfWeek().getAsString();
+		// Calendar calendar = new GregorianCalendar();
+		// setWeekDay(DateUtilities.getWeekDay(calendar.get(Calendar.DAY_OF_WEEK)));
+		// setCurrentDateAndTime(new Timestamp(new Date().getTime()));
+		setWeekDay(localDate.dayOfWeek().getAsText());
+		return this;
+	}
 
 	public Date getCurrentDateAndTime() {
 		return currentDateAndTime;
@@ -83,6 +95,14 @@ public class Entwicklung implements Serializable {
 
 	public void setStillenBemerkung(String stillenBemerkung) {
 		this.stillenBemerkung = stillenBemerkung;
+	}
+
+	public String getWeekDay() {
+		return weekDay;
+	}
+
+	public void setWeekDay(String weekDay) {
+		this.weekDay = weekDay;
 	}
 
 }

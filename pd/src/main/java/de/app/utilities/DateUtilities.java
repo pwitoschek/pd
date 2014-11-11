@@ -6,8 +6,6 @@ package de.app.utilities;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import de.app.pd.entities.pv.Unit;
-
 /**
  * @author pd
  * 
@@ -48,14 +46,16 @@ public class DateUtilities {
 		return timestamp;
 	}
 
-	// Diese Methode gibt einen String in diesem Format zurück:
+	// Diese Methode gibt einen String in diesem Format zurï¿½ck:
 	// 2013-11-26 18:40:24
-	public static String convertDateToMySQLDate(Unit unit) {
+	public static String convertDateToMySQLDate(Date currentDateAndTime) {
 		String result = "";
-		Date date = unit.getCurrentDateAndTime();
-		result = (1900 + date.getYear()) + "-" + date.getMonth() + "-"
-				+ date.getDay() + " " + date.getHours() + ":"
-				+ date.getMinutes() + ":" + date.getSeconds();
+		result = (1900 + currentDateAndTime.getYear()) + "-"
+				+ currentDateAndTime.getMonth() + "-"
+				+ currentDateAndTime.getDay() + " "
+				+ currentDateAndTime.getHours() + ":"
+				+ currentDateAndTime.getMinutes() + ":"
+				+ currentDateAndTime.getSeconds();
 		return result;
 	}
 

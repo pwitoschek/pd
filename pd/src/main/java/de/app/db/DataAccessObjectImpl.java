@@ -25,6 +25,7 @@ import org.springframework.webflow.core.collection.LocalAttributeMap;
 import org.springframework.webflow.execution.Event;
 
 import de.app.interfaces.DataAccessObject;
+import de.app.pd.entities.paul.Entwicklung;
 import de.app.pd.entities.pv.Tagesertrag;
 import de.app.pd.entities.pv.Tagesverbrauch;
 import de.app.utilities.DBException;
@@ -149,13 +150,67 @@ public class DataAccessObjectImpl implements DataAccessObject {
 		ResultSet rs = null;
 		String query = "";
 		try {
-			query = "INSERT INTO pd_spring.tagesertrag (" + "id,"
-					+ "currentDateAndTime," + "durchschnittsTemperatur,"
-					+ "weekDay," + "ertrag" + ")" + "VALUES (" + "NULL ,'"
-					+ DateUtilities.convertDateToMySQLDate(tagesertrag) + "',"
+			query = "INSERT INTO pd_spring.tagesertrag ("
+					+ "id,"
+					+ "currentDateAndTime,"
+					+ "durchschnittsTemperatur,"
+					+ "weekDay,"
+					+ "ertrag"
+					+ ")"
+					+ "VALUES ("
+					+ "NULL ,'"
+					+ DateUtilities.convertDateToMySQLDate(tagesertrag
+							.getCurrentDateAndTime()) + "',"
 					+ tagesertrag.getDurchschnittsTemperatur() + ",'"
 					+ tagesertrag.getWeekDay() + "'," + tagesertrag.getErtrag()
 					+ ")";
+
+			connection = dataSource.getConnection();
+			ps = connection.prepareStatement(query);
+			ps.execute();
+			result = "success";
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			logger.error(query);
+		} finally {
+			DbUtils.closeQuietly(connection, ps, rs);
+		}
+		return new Event(this, result, attributeMap);
+	}
+
+	public Event addEntwicklung(Entwicklung entwicklung) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("testAttribute", "test1");
+		AttributeMap<Object> attributeMap = new LocalAttributeMap<Object>(map);
+
+		String result = "failure";
+		Connection connection = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String query = "";
+
+		try {
+			query = "INSERT INTO pd_spring.entwicklung ("
+					+ "id,"
+					+ "datum,"
+					+ "pipi,"
+					+ "kaka,"
+					+ "wickeln"
+					+ "bemerkung"
+					+ "stillen"
+					+ "stillenBemerkung"
+					+ "wochentag"
+					+ ")"
+					+ "VALUES ("
+					+ "NULL ,'"
+					+ DateUtilities.convertDateToMySQLDate(entwicklung
+							.getCurrentDateAndTime()) + "',"
+					+ entwicklung.isPipi() + "," + entwicklung.isKaka() + ","
+					+ entwicklung.isWickeln() + ",'"
+					+ entwicklung.getBemerkung() + "',"
+					+ entwicklung.isStillen() + ",'"
+					+ entwicklung.getStillenBemerkung() + "','"
+					+ entwicklung.getWeekDay() + "')";
 
 			connection = dataSource.getConnection();
 			ps = connection.prepareStatement(query);
@@ -184,12 +239,18 @@ public class DataAccessObjectImpl implements DataAccessObject {
 		ResultSet rs = null;
 		String query = "";
 		try {
-			query = "INSERT INTO pd_spring.tagesverbrauch (" + "id,"
-					+ "currentDateAndTime," + "durchschnittsTemperatur,"
-					+ "weekDay," + "gebrauchteKWH" + ")" + "VALUES ("
+			query = "INSERT INTO pd_spring.tagesverbrauch ("
+					+ "id,"
+					+ "currentDateAndTime,"
+					+ "durchschnittsTemperatur,"
+					+ "weekDay,"
+					+ "gebrauchteKWH"
+					+ ")"
+					+ "VALUES ("
 					+ "NULL ,'"
-					+ DateUtilities.convertDateToMySQLDate(tagesverbrauch)
-					+ "'," + tagesverbrauch.getDurchschnittsTemperatur() + ",'"
+					+ DateUtilities.convertDateToMySQLDate(tagesverbrauch
+							.getCurrentDateAndTime()) + "',"
+					+ tagesverbrauch.getDurchschnittsTemperatur() + ",'"
 					+ tagesverbrauch.getWeekDay() + "',"
 					+ tagesverbrauch.getGebrauchteKWH() + ")";
 

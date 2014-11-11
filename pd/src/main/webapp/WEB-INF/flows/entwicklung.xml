@@ -21,7 +21,7 @@
 	</view-state>
 
 	<view-state id="reviewEnterEnticklung" 
-		view="/WEB-INF/views/paul/reviewEnterEnticklung.jsp">
+		view="/WEB-INF/views/paul/reviewEnterEntwicklung.jsp">
 		<transition on="submit" to="saveData"></transition>
 		<transition on="back" validate="false" bind="false" to="startEnterEntwicklung"/>
 	</view-state>
