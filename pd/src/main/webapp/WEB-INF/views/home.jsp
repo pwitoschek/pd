@@ -15,10 +15,9 @@ $(document).ready(function(){
 	
 	init();
 	
-	$("#refresh").click(function(){getResult("fdfd", "dsds");});
+	$("#refresh").click(function(){getResult($("#date1").val(), $("#date2").val());});
 	
 	
-     
 });
 
 function getResult(date1, date2){
