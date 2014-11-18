@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page session="false"%>
 <html>
 <head>
@@ -69,9 +70,10 @@ function init(){
 	<h1>Hello world!</h1>
 
 	<P>The time on the server is ${serverTime}.</P>
-	<input type="text" id="date1"/>
-	<input type="text" id="date2"/>
-	<button id="refresh" type="button"/>Refresh</button>
+	
+	<input type="text" id="date1" value="2014-03-11"/>
+	<input type="text" id="date2" value="${now}"/>
+	<button id="refresh" type="button">Refresh</button>
 	
 	<div id="chart1"></div>
 </body>

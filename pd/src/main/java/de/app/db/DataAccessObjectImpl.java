@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,11 +46,11 @@ public class DataAccessObjectImpl implements DataAccessObject {
 	@Autowired
 	DataSource dataSource;
 
-	private static Log4JLogger logger = new Log4JLogger();
+	private static Log4JLogger LOGGER = new Log4JLogger();
 
 	/*
-	 * Diese Methode gibt alle gespeicherten Tagesertr�ge zur�ck Es wird
-	 * noch ermittelt
+	 * Diese Methode gibt alle gespeicherten Tagesertr�ge zur�ck Es wird noch
+	 * ermittelt
 	 */
 	@Override
 	public List<Tagesertrag> getTagesertrag(int month) {
@@ -82,7 +83,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
 				tagesertraege.add(tempTagesertrag);
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			LOGGER.error(e.getMessage());
 		} finally {
 			DbUtils.closeQuietly(connection, ps, rs);
 		}
@@ -126,7 +127,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
 				tempSumToday = gebrauchteKWH;
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			LOGGER.error(e.getMessage());
 		} finally {
 			DbUtils.closeQuietly(connection, ps, rs);
 		}
@@ -170,8 +171,8 @@ public class DataAccessObjectImpl implements DataAccessObject {
 			ps.execute();
 			result = "success";
 		} catch (Exception e) {
-			logger.error(e.getMessage());
-			logger.error(query);
+			LOGGER.error(e.getMessage());
+			LOGGER.error(query);
 		} finally {
 			DbUtils.closeQuietly(connection, ps, rs);
 		}
@@ -189,7 +190,11 @@ public class DataAccessObjectImpl implements DataAccessObject {
 		ResultSet rs = null;
 		String query = "";
 
+		// 2014-11-12 12:00:00
+		Date current = null;
 		try {
+			current = new SimpleDateFormat("YYYY-dd-MM hh:mm:ss")
+					.parse(entwicklung.getCurrentDateAndTime());
 			String query2 = "INSERT INTO pd_spring.entwicklung (" + "datum,"
 					+ "gewicht," + "pipi," + "kaka," + "wickeln,"
 					+ "bemerkung," + "stillen," + "stillenBemerkung,"
@@ -197,7 +202,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
 
 			connection = dataSource.getConnection();
 			ps = connection.prepareStatement(query2);
-			ps.setString(1, entwicklung.getCurrentDateAndTime());
+			ps.setDate(1, new java.sql.Date(current.getTime()));
 			ps.setDouble(2, entwicklung.getGewicht());
 			ps.setBoolean(3, entwicklung.isPipi());
 			ps.setBoolean(4, entwicklung.isKaka());
@@ -209,8 +214,8 @@ public class DataAccessObjectImpl implements DataAccessObject {
 			ps.execute();
 			result = "success";
 		} catch (Exception e) {
-			logger.error(e.getMessage());
-			logger.error(query);
+			LOGGER.error(e.getMessage());
+			LOGGER.error(query);
 		} finally {
 			DbUtils.closeQuietly(connection, ps, rs);
 		}
@@ -251,7 +256,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
 			ps.execute();
 			result = true;
 		} catch (SQLException e) {
-			logger.error(e.getMessage());
+			LOGGER.error(e.getMessage());
 			try {
 				throw new DBException();
 			} catch (DBException e1) {

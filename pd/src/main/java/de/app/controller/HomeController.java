@@ -1,6 +1,7 @@
 package de.app.controller;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -43,9 +44,12 @@ public class HomeController {
 
 		String formattedDate = dateFormat.format(date);
 
+		SimpleDateFormat formatter = new SimpleDateFormat("YYYY-dd-MM");
+
 		String query = "select * from entwicklung";
 		String result = customDBUtils.generateJson(query);
 		model.addAttribute("serverTime", formattedDate);
+		model.addAttribute("now", formatter.format(new Date()));
 		model.addAttribute("result", result);
 
 		return "home";
