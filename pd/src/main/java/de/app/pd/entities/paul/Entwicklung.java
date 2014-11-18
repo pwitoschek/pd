@@ -1,7 +1,6 @@
 package de.app.pd.entities.paul;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import org.joda.time.LocalDate;
 import org.springframework.stereotype.Component;
@@ -13,7 +12,7 @@ public class Entwicklung implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -5769133221729712228L;
-	private Date currentDateAndTime;
+	private String currentDateAndTime;
 	private Double gewicht;
 	private boolean pipi;
 	private boolean kaka;
@@ -33,11 +32,11 @@ public class Entwicklung implements Serializable {
 		return this;
 	}
 
-	public Date getCurrentDateAndTime() {
+	public String getCurrentDateAndTime() {
 		return currentDateAndTime;
 	}
 
-	public void setCurrentDateAndTime(Date currentDateAndTime) {
+	public void setCurrentDateAndTime(String currentDateAndTime) {
 		this.currentDateAndTime = currentDateAndTime;
 	}
 

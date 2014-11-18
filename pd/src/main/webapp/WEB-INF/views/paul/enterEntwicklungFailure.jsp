@@ -8,10 +8,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Eingabe erfolgreich</title>
+<title>Failure</title>
 </head>
 <body>
-	Deine Eingabe war erfolgreich.
-	<a href="/">Hier</a> geht es zur Statisik.
+	Failure
 </body>
 </html>

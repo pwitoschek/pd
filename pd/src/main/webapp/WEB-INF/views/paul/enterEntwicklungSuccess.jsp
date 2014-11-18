@@ -11,7 +11,7 @@
 <title>Eingabe erfolgreich</title>
 </head>
 <body>
-	Deine Eingabe war erfolgreich.
-	<a href="/">Hier</a> geht es zur Statisik.
+	Deine Eingabe war erfolgreich.<br>
+	<a href="/pd/">Hier</a> geht es zur Statisik.
 </body>
 </html>

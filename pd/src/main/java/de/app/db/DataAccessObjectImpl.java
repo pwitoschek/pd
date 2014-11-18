@@ -48,8 +48,8 @@ public class DataAccessObjectImpl implements DataAccessObject {
 	private static Log4JLogger logger = new Log4JLogger();
 
 	/*
-	 * Diese Methode gibt alle gespeicherten Tagesertr�ge zur�ck Es wird noch
-	 * ermittelt
+	 * Diese Methode gibt alle gespeicherten Tagesertr�ge zur�ck Es wird
+	 * noch ermittelt
 	 */
 	@Override
 	public List<Tagesertrag> getTagesertrag(int month) {
@@ -190,30 +190,22 @@ public class DataAccessObjectImpl implements DataAccessObject {
 		String query = "";
 
 		try {
-			query = "INSERT INTO pd_spring.entwicklung ("
-					+ "id,"
-					+ "datum,"
-					+ "pipi,"
-					+ "kaka,"
-					+ "wickeln"
-					+ "bemerkung"
-					+ "stillen"
-					+ "stillenBemerkung"
-					+ "wochentag"
-					+ ")"
-					+ "VALUES ("
-					+ "NULL ,'"
-					+ DateUtilities.convertDateToMySQLDate(entwicklung
-							.getCurrentDateAndTime()) + "',"
-					+ entwicklung.isPipi() + "," + entwicklung.isKaka() + ","
-					+ entwicklung.isWickeln() + ",'"
-					+ entwicklung.getBemerkung() + "',"
-					+ entwicklung.isStillen() + ",'"
-					+ entwicklung.getStillenBemerkung() + "','"
-					+ entwicklung.getWeekDay() + "')";
+			String query2 = "INSERT INTO pd_spring.entwicklung (" + "datum,"
+					+ "gewicht," + "pipi," + "kaka," + "wickeln,"
+					+ "bemerkung," + "stillen," + "stillenBemerkung,"
+					+ "wochentag" + ")" + "VALUES (?,?,?,?,?,?,?,?,?)";
 
 			connection = dataSource.getConnection();
-			ps = connection.prepareStatement(query);
+			ps = connection.prepareStatement(query2);
+			ps.setString(1, entwicklung.getCurrentDateAndTime());
+			ps.setDouble(2, entwicklung.getGewicht());
+			ps.setBoolean(3, entwicklung.isPipi());
+			ps.setBoolean(4, entwicklung.isKaka());
+			ps.setBoolean(5, entwicklung.isWickeln());
+			ps.setString(6, entwicklung.getBemerkung());
+			ps.setBoolean(7, entwicklung.isStillen());
+			ps.setString(8, entwicklung.getStillenBemerkung());
+			ps.setString(9, entwicklung.getWeekDay());
 			ps.execute();
 			result = "success";
 		} catch (Exception e) {

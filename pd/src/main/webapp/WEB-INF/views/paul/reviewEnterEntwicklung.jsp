@@ -21,32 +21,55 @@
 				<tr>
 					<td>Aktueller Zeitstempel:</td>
 					<td>
-						<c:out value="${tagesertrag.currentDateAndTime }"></c:out>
+						<c:out value="${entwicklung.currentDateAndTime }"></c:out>
 					</td>
 				</tr>
 				<tr>
 					<td>Aktueller Wochentag:</td>
 					<td>
-						<c:out value="${tagesertrag.weekDay }"></c:out>
+						<c:out value="${entwicklung.weekDay }"></c:out>
 					</td>
 				</tr>
 				<tr>
-					<td>Durchschnittstemperatur:</td>
+					<td>Gewicht:</td>
 					<td>
-						<c:out value="${tagesertrag.durchschnittsTemperatur }"></c:out>
-						<c:out value="${tagesverbrauch.durchschnittsTemperatur }"></c:out>
+						<c:out value="${entwicklung.gewicht }"></c:out>
 					</td>
 				</tr>
 				<tr>
-					<td>Tagesertrag:</td>
+					<td>Stillen:</td>
 					<td>
-						<c:out value="${tagesertrag.ertrag }"></c:out>
+						<c:out value="${entwicklung.stillen }"></c:out>
 					</td>
 				</tr>
 				<tr>
-					<td>Tagesverbrauch:</td>
+					<td>Stillen Bemerkung:</td>
 					<td>
-						<c:out value="${tagesverbrauch.gebrauchteKWH}"></c:out>
+						<c:out value="${entwicklung.stillenBemerkung}"></c:out>
+					</td>
+				</tr>
+				<tr>
+					<td>Wickeln:</td>
+					<td>
+						<c:out value="${entwicklung.wickeln}"></c:out>
+					</td>
+				</tr>
+				<tr>
+					<td>Pipi:</td>
+					<td>
+						<c:out value="${entwicklung.pipi}"></c:out>
+					</td>
+				</tr>
+				<tr>
+					<td>Kaka:</td>
+					<td>
+						<c:out value="${entwicklung.kaka}"></c:out>
+					</td>
+				</tr>
+				<tr>
+					<td>Bemerkung:</td>
+					<td>
+						<c:out value="${entwicklung.bemerkung}"></c:out>
 					</td>
 				</tr>
 			</table>

@@ -36,9 +36,9 @@
 	</action-state>
 
 	<end-state id="enterDataSuccess"
-		view="/WEB-INF/views/photovoltaik/ertrag/enterPVDataSuccess.jsp" />
+		view="/WEB-INF/views/paul/enterEntwicklungSuccess.jsp" />
 	<end-state id="enterDataFailure"
-		view="/WEB-INF/views/photovoltaik/ertrag/enterPVDataFailure.jsp" />
+		view="/WEB-INF/views/paul/enterEntwicklungFailure.jsp" />
 		
 	<action-state id="evaluateNavi">
 		<on-entry>
