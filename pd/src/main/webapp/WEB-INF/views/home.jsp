@@ -22,12 +22,12 @@ $(document).ready(function(){
 });
 
 function getResult(date1, date2){
-	var url = "/pd/entwicklung.json)";
+	var url = "/pd/entwicklung.json";
 	$.ajax({
 		type : "GET",
 		url : url,
 		cache : false,
-		data : { fromDate1: date1 , fromDate2: date2},
+		data : { fromDate1: date1 , toDate2: date2},
 		dataType : "json",
 		success : function(response){
 			console.info("success");
