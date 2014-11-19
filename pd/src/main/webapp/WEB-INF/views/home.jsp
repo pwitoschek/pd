@@ -3,7 +3,7 @@
 <%@ page session="false"%>
 <html>
 <head>
-<title>Home</title>
+<title>Gewichtsverlauf</title>
 <script type="text/javascript" src="resources/javascript/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="resources/javascript/plot/jqplot.canvasTextRenderer.js"></script>
 <script type="text/javascript" src="resources/javascript/plot/jqplot.canvasAxisLabelRenderer.js"></script>
@@ -79,7 +79,7 @@ function init(line){
 
 </head>
 <body>
-	<h1>Hello world!</h1>
+	<h1>Gewichtsverlauf</h1>
 
 	<P>The time on the server is ${serverTime}.</P>
 	
