@@ -14,7 +14,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
-	init();
+	getResult($("#date1").val(), $("#date2").val());
 	
 	$("#refresh").click(function(){getResult($("#date1").val(), $("#date2").val());});
 	
@@ -29,20 +29,27 @@ function getResult(date1, date2){
 		cache : false,
 		data : { fromDate1: date1 , toDate2: date2},
 		dataType : "json",
-		success : function(response){
-			console.info("success");
+		success : function(msg, testStatus){
+			var result = [];
+			console.info(msg);
+			for (var i = 0; i < msg.length; i++){
+				var temp = [msg[i].datum, msg[i].gewicht];
+				result.push(temp);
+				
+			}
+			console.info(result);
+			init(result);
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown){
-			console.info("error");
 		}
 		
 	});
 }
 
-function init(){
-	var line2 = [['18.11.2014 05:00', 2590], ['17.11.2014 06:00', 2570], ['16.11.2014 07:00', 2560], ['15.11.2014 08:00', 2540]];
-	 
-    var plot2 = $.jqplot('chart1', [line2], {
+function init(line){
+	//var line2 = [['18.11.2014 05:00', 2590], ['17.11.2014 06:00', 2570], ['16.11.2014 07:00', 2560], ['15.11.2014 08:00', 2540]];
+	 console.info(line);
+    var plot2 = $.jqplot('chart1', [line], {
 	  series:[{showMarker:true}],
       axes: {
         xaxis: {

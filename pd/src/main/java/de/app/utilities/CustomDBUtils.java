@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 @Component
@@ -45,9 +46,9 @@ public class CustomDBUtils {
 	}
 
 	private String getJsonString(ResultSet resultSet) {
-		JsonArray jsonArray = getJson(resultSet);
+		JsonElement element = getJson(resultSet);
 		Gson gson = new Gson();
-		return gson.toJson(jsonArray);
+		return gson.toJson(element);
 	}
 
 	private JsonArray getJson(final ResultSet rs) {
@@ -80,6 +81,8 @@ public class CustomDBUtils {
 						obj.addProperty(columnName, rs.getInt(columnName));
 					} else if (rsmd.getColumnType(i) == java.sql.Types.SMALLINT) {
 						obj.addProperty(columnName, rs.getInt(columnName));
+					} else if (rsmd.getColumnType(i) == java.sql.Types.TIMESTAMP) {
+						obj.addProperty(columnName, rs.getString(columnName));
 					}
 				}
 				json.add(obj);

@@ -14,7 +14,7 @@ import de.app.utilities.CustomDBUtils;
 @Controller
 public class EntwicklungServlet {
 
-	private Logger LOGGER = Logger.getLogger(EntwicklungServlet.class);
+	private final Logger LOGGER = Logger.getLogger(EntwicklungServlet.class);
 	@Autowired
 	private CustomDBUtils customDBUtils;
 
@@ -26,9 +26,8 @@ public class EntwicklungServlet {
 			@RequestParam("toDate2") final String date2) {
 		String result = "";
 		LOGGER.debug(date1 + "" + date2);
-		String query = "SELECT * FROM entwicklung WHERE datum >= STR_TO_DATE('"
-				+ date1 + "', '%Y-%m-%d %H:%i:%s') and datum <= STR_TO_DATE('"
-				+ date2 + "', '%Y-%m-%d %H:%i:%s')";
+		String query = "SELECT * FROM entwicklung WHERE datum >= '" + date1
+				+ " 00:00:00'" + " and datum <= '" + date2 + " 00:00:00'";
 		result = customDBUtils.generateJson(query);
 		return result;
 	}

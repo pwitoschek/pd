@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -49,8 +50,8 @@ public class DataAccessObjectImpl implements DataAccessObject {
 	private static Log4JLogger LOGGER = new Log4JLogger();
 
 	/*
-	 * Diese Methode gibt alle gespeicherten Tagesertr�ge zur�ck Es wird noch
-	 * ermittelt
+	 * Diese Methode gibt alle gespeicherten Tagesertr�ge zur�ck Es wird
+	 * noch ermittelt
 	 */
 	@Override
 	public List<Tagesertrag> getTagesertrag(int month) {
@@ -193,16 +194,16 @@ public class DataAccessObjectImpl implements DataAccessObject {
 		// 2014-11-12 12:00:00
 		Date current = null;
 		try {
-			current = new SimpleDateFormat("YYYY-dd-MM hh:mm:ss")
+			current = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 					.parse(entwicklung.getCurrentDateAndTime());
 			String query2 = "INSERT INTO pd_spring.entwicklung (" + "datum,"
 					+ "gewicht," + "pipi," + "kaka," + "wickeln,"
 					+ "bemerkung," + "stillen," + "stillenBemerkung,"
-					+ "wochentag" + ")" + "VALUES (?,?,?,?,?,?,?,?,?)";
+					+ "wochentag" + ")" + " VALUES (?,?,?,?,?,?,?,?,?)";
 
 			connection = dataSource.getConnection();
 			ps = connection.prepareStatement(query2);
-			ps.setDate(1, new java.sql.Date(current.getTime()));
+			ps.setTimestamp(1, new Timestamp(current.getTime()));
 			ps.setDouble(2, entwicklung.getGewicht());
 			ps.setBoolean(3, entwicklung.isPipi());
 			ps.setBoolean(4, entwicklung.isKaka());
