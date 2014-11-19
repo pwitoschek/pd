@@ -10,6 +10,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Kontrolle der allgemeinen Angaben</title>
+<script type="text/javascript"
+	src="resources/javascript/jquery-1.9.1.js"></script>
 </head>
 <body>
 <h1>Schritt 2: Bitte Angaben kontrollieren</h1>

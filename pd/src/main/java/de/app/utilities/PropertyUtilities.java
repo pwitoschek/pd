@@ -3,7 +3,6 @@
  */
 package de.app.utilities;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -22,17 +21,17 @@ public class PropertyUtilities {
 		InputStream is = null;
 		try {
 			if (definition.equals("ertrag")) {
-				// is =
-				// this.getClass().getClassLoader().getResourceAsStream("/Users/peterwitoschek/git/pd/pd/src/main/webapp/WEB-INF/properties/flow.properties");
-				is = new FileInputStream(
-				// "/Users/peterwitoschek/git/pd/pd/src/main/webapp/WEB-INF/properties/ertrag.properties");
-						"C:/Users/pd/git/pd/pd/src/main/webapp/WEB-INF/properties/ertrag.properties");
-				// is =
-				// Thread.currentThread().getContextClassLoader().getResourceAsStream("/WEB-INF/properties/flow.properties");
+				is = Thread
+						.currentThread()
+						.getContextClassLoader()
+						.getResourceAsStream(
+								"/WEB-INF/properties/ertrag.properties");
 			} else if (definition.equals("entwicklung")) {
-				is = new FileInputStream(
-				// "/Users/peterwitoschek/git/pd/pd/src/main/webapp/WEB-INF/properties/entwicklung.properties");
-						"C:/Users/pd/git/pd/pd/src/main/webapp/WEB-INF/properties/entwicklung.properties");
+				is = Thread
+						.currentThread()
+						.getContextClassLoader()
+						.getResourceAsStream(
+								"/WEB-INF/properties/entwicklung.properties");
 			}
 			if (is != null) {
 				properties.load(is);

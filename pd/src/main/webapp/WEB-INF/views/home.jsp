@@ -10,13 +10,18 @@
 <script type="text/javascript" src="resources/javascript/plot/jqplot.canvasAxisTickRenderer.js"></script>
 <script type="text/javascript" src="resources/javascript/plot/jquery.jqplot.js"></script>
 <script type="text/javascript" src="resources/javascript/plot/jqplot.dateAxisRenderer.js"></script>
+<script type="text/javascript"src="resources/javascript/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/css/plot/jquery.jqplot.css" />
+<link type="text/css" rel="stylesheet" href="resources/css/ui-lightness/jquery-ui-1.10.3.custom.css">
+<link type="text/css" rel="stylesheet" href="resources/css/jquery-ui-timepicker-addon.css">
+
 <script type="text/javascript">
 $(document).ready(function(){
 	
-	getResult($("#date1").val(), $("#date2").val());
+	getResult($("input[name='date1']").val(), $("input[name='date2']").val());
 	
-	$("#refresh").click(function(){getResult($("#date1").val(), $("#date2").val());});
+	$("#refresh").click(function(){getResult($("input[name='date1']").val(), $("input[name='date2']").val());});
 	
 	
 });
@@ -78,8 +83,8 @@ function init(line){
 
 	<P>The time on the server is ${serverTime}.</P>
 	
-	<input type="text" id="date1" value="2014-03-11"/>
-	<input type="text" id="date2" value="${now}"/>
+	<input type="text" name="date1" value="2014-03-11" id="datetimepicker"/>
+	<input type="text" name="date2" value="${now}" id="datetimepicker"/>
 	<button id="refresh" type="button">Refresh</button>
 	
 	<div id="chart1"></div>

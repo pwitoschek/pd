@@ -48,7 +48,7 @@
 			<set name="requestScope.key" value="flowExecutionContext.key"></set>
 		</on-entry>
 		<evaluate
-			expression="navigationEvaluation.evaluate(activeSession, conversationScope.target, key, definition, currentEvent)"
+			expression="navigationEvaluation.evaluate(activeSession, target, key, definition, currentEvent)"
 			result=""></evaluate>
 		<transition on="success" to="#{conversationScope.target}" />
 	</action-state>
