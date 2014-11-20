@@ -54,8 +54,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
 			while (rs.next()) {
 				Tagesertrag tempTagesertrag = new Tagesertrag();
 
-				tempTagesertrag.setCurrentDateAndTime(new SimpleDateFormat()
-						.parse(rs.getString("currentDateAndTime")));
+				tempTagesertrag.setCurrentDateAndTime(rs.getString("currentDateAndTime"));
 				tempTagesertrag.setDurchschnittsTemperatur(Double
 						.parseDouble(rs.getString("durchSchnittsTemperatur")));
 				tempTagesertrag.setWeekDay(rs.getString("weekDay"));
@@ -91,7 +90,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
 			while (rs.next()) {
 				Tagesverbrauch tempTagesverbrauch = new Tagesverbrauch();
 
-				tempTagesverbrauch.setCurrentDateAndTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(rs.getString("currentDateAndTime")));
+				tempTagesverbrauch.setCurrentDateAndTime(rs.getString("currentDateAndTime"));
 				tempTagesverbrauch.setDurchschnittsTemperatur(Double.parseDouble(rs.getString("durchSchnittsTemperatur")));
 				tempTagesverbrauch.setWeekDay(rs.getString("weekDay"));
 				tempTagesverbrauch.setGebrauchteKWH(Double.valueOf(rs.getString("gebrauchteKWH")));

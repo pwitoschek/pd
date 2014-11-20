@@ -19,20 +19,13 @@ public class PropertyUtilities {
 		String result = "";
 		Properties properties = new Properties();
 		InputStream is = null;
+
 		try {
-			if (definition.equals("ertrag")) {
-				is = Thread
-						.currentThread()
-						.getContextClassLoader()
-						.getResourceAsStream(
-								"/WEB-INF/properties/ertrag.properties");
-			} else if (definition.equals("entwicklung")) {
-				is = Thread
-						.currentThread()
-						.getContextClassLoader()
-						.getResourceAsStream(
-								"/WEB-INF/properties/entwicklung.properties");
-			}
+			is = Thread
+					.currentThread()
+					.getContextClassLoader()
+					.getResourceAsStream(
+							"/WEB-INF/properties/" + definition + ".properties");
 			if (is != null) {
 				properties.load(is);
 				result = properties.getProperty(field);

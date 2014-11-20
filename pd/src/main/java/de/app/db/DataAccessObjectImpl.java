@@ -31,7 +31,6 @@ import de.app.pd.entities.paul.Entwicklung;
 import de.app.pd.entities.pv.Tagesertrag;
 import de.app.pd.entities.pv.Tagesverbrauch;
 import de.app.utilities.DBException;
-import de.app.utilities.DateUtilities;
 
 /**
  * @author Peter
@@ -67,8 +66,8 @@ public class DataAccessObjectImpl implements DataAccessObject {
 			while (rs.next()) {
 				Tagesertrag tempTagesertrag = new Tagesertrag();
 
-				tempTagesertrag.setCurrentDateAndTime(new SimpleDateFormat()
-						.parse(rs.getString("currentDateAndTime")));
+				tempTagesertrag.setCurrentDateAndTime(rs
+						.getString("currentDateAndTime"));
 				if (StringUtils.isNotEmpty(rs
 						.getString("durchSchnittsTemperatur"))) {
 					tempTagesertrag.setDurchschnittsTemperatur(0.0);
@@ -114,9 +113,8 @@ public class DataAccessObjectImpl implements DataAccessObject {
 				Double gebrauchteKWH = Double.valueOf(rs
 						.getString("gebrauchteKWH"));
 
-				tempTagesverbrauch.setCurrentDateAndTime(new SimpleDateFormat(
-						"yyyy-MM-dd HH:mm:ss").parse(rs
-						.getString("currentDateAndTime")));
+				tempTagesverbrauch.setCurrentDateAndTime(rs
+						.getString("currentDateAndTime"));
 				tempTagesverbrauch.setDurchschnittsTemperatur(Double
 						.parseDouble(rs.getString("durchSchnittsTemperatur")));
 				tempTagesverbrauch.setWeekDay(rs.getString("weekDay"));
@@ -153,16 +151,9 @@ public class DataAccessObjectImpl implements DataAccessObject {
 		String query = "";
 		try {
 			query = "INSERT INTO pd_spring.tagesertrag ("
-					+ "id,"
-					+ "currentDateAndTime,"
-					+ "durchschnittsTemperatur,"
-					+ "weekDay,"
-					+ "ertrag"
-					+ ")"
-					+ "VALUES ("
-					+ "NULL ,'"
-					+ DateUtilities.convertDateToMySQLDate(tagesertrag
-							.getCurrentDateAndTime()) + "',"
+					+ "currentDateAndTime," + "durchschnittsTemperatur,"
+					+ "weekDay," + "ertrag" + ")" + "VALUES (" + "'"
+					+ tagesertrag.getCurrentDateAndTime() + "',"
 					+ tagesertrag.getDurchschnittsTemperatur() + ",'"
 					+ tagesertrag.getWeekDay() + "'," + tagesertrag.getErtrag()
 					+ ")";
@@ -237,17 +228,10 @@ public class DataAccessObjectImpl implements DataAccessObject {
 		ResultSet rs = null;
 		String query = "";
 		try {
-			query = "INSERT INTO pd_spring.tagesverbrauch ("
-					+ "id,"
-					+ "currentDateAndTime,"
-					+ "durchschnittsTemperatur,"
-					+ "weekDay,"
-					+ "gebrauchteKWH"
-					+ ")"
-					+ "VALUES ("
-					+ "NULL ,'"
-					+ DateUtilities.convertDateToMySQLDate(tagesverbrauch
-							.getCurrentDateAndTime()) + "',"
+			query = "INSERT INTO pd_spring.tagesverbrauch (" + "id,"
+					+ "currentDateAndTime," + "durchschnittsTemperatur,"
+					+ "weekDay," + "gebrauchteKWH" + ")" + "VALUES ("
+					+ "NULL ,'" + tagesverbrauch.getCurrentDateAndTime() + "',"
 					+ tagesverbrauch.getDurchschnittsTemperatur() + ",'"
 					+ tagesverbrauch.getWeekDay() + "',"
 					+ tagesverbrauch.getGebrauchteKWH() + ")";

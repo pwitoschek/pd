@@ -57,6 +57,7 @@
 				<tr>
 					<td colspan="2">
 						<tags:error property="currentDateAndTime"></tags:error>
+					</td>
 				</tr>
 				<tr>
 					<td>Wochentag</td>

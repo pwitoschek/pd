@@ -9,6 +9,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript"
+	src="resources/javascript/jquery-1.9.1.js"></script>
 <title>Übersicht Ertrag</title>
 </head>
 <body>
@@ -31,13 +33,10 @@
 					</td>
 				</tr>
 				<tr>
-				 <c:if test='${tagesertrag.durchschnittsTemperatur > -20"}'>
 					<td>Durchschnittstemperatur:</td>
 					<td>
 						<c:out value="${tagesertrag.durchschnittsTemperatur }"></c:out>
-						<c:out value="${tagesverbrauch.durchschnittsTemperatur }"></c:out>
 					</td>
-				</c:if>
 				</tr>
 					<tr>
 						<td>Tagesertrag:</td>

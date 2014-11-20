@@ -4,7 +4,7 @@ import java.util.Date;
 
 public abstract class Unit {
 	private String weekDay;
-	private Date currentDateAndTime;
+	private String currentDateAndTime;
 	private Double durchschnittsTemperatur;
 
 	public String getWeekDay() {
@@ -15,11 +15,11 @@ public abstract class Unit {
 		this.weekDay = weekDay;
 	}
 
-	public Date getCurrentDateAndTime() {
+	public String getCurrentDateAndTime() {
 		return currentDateAndTime;
 	}
 
-	public void setCurrentDateAndTime(Date currentDateAndTime) {
+	public void setCurrentDateAndTime(String currentDateAndTime) {
 		this.currentDateAndTime = currentDateAndTime;
 	}
 
