@@ -151,13 +151,18 @@ public class DataAccessObjectImpl implements DataAccessObject {
 		String query = "";
 		try {
 			query = "INSERT INTO pd_spring.tagesertrag ("
-					+ "currentDateAndTime," + "durchschnittsTemperatur,"
-					+ "weekDay," + "ertrag" + ")" + "VALUES (" + "'"
-					+ tagesertrag.getCurrentDateAndTime() + "',"
-					+ tagesertrag.getDurchschnittsTemperatur() + ",'"
-					+ tagesertrag.getWeekDay() + "'," + tagesertrag.getErtrag()
-					+ ")";
-
+					+ "currentDateAndTime,"
+					+ "durchschnittsTemperatur,"
+					+ "weekDay,"
+					+ "ertrag"
+					+ ")"
+					+ "VALUES ("
+					+ "'"
+					+ tagesertrag.getCurrentDateAndTime()
+					+ "',"
+					+ getDefaultIfNull(tagesertrag.getDurchschnittsTemperatur())
+					+ ",'" + tagesertrag.getWeekDay() + "',"
+					+ getDefaultIfNull(tagesertrag.getErtrag()) + ")";
 			connection = dataSource.getConnection();
 			ps = connection.prepareStatement(query);
 			ps.execute();
@@ -293,6 +298,16 @@ public class DataAccessObjectImpl implements DataAccessObject {
 		// TODO Auto-generated method stub
 		return false;
 
+	}
+
+	public Double getDefaultIfNull(Double property) {
+		Double result;
+		if (property == null) {
+			result = 0.0;
+		} else {
+			result = property;
+		}
+		return result;
 	}
 
 }
