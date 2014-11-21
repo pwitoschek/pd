@@ -10,7 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
-<title>Start Enter PV Data</title>
+<title>Verbrauch</title>
 <link type="text/css" rel="stylesheet"
 	href="resources/css/ui-lightness/jquery-ui-1.10.3.custom.css">
 <link type="text/css" rel="stylesheet"
@@ -39,12 +39,12 @@
 <body>
 	<tags:navigation/>
 	<form:errors path="*" />
-	<form:form modelAttribute="tagesertrag">
+	<form:form modelAttribute="tagesverbrauch">
 		<div>
 			<table>
 				<tr>
 					<td colspan="2">
-						<h2>Allgemeine Angaben zum Tagesertrag</h2>
+						<h2>Allgemeine Angaben zum Tagesverbrauch</h2>
 					</td>
 				</tr>
 				<tr>
@@ -68,16 +68,16 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<h2>Spezifischen Angaben zum Ertrag</h2>
+						<h2>Spezifischen Angaben zum Verbrauch</h2>
 					</td>
 				</tr>
 				<tr>
-					<td>Bitte geben Sie den heute eingespeisten Ertrag ein:</td>
-					<td><form:input path="ertrag" /></td>
+					<td>Bitte geben Sie den heute verbrauchten Strom ein:</td>
+					<td><form:input path="gebrauchteKWH" /></td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<tags:error property="ertrag"/>
+						<tags:error property="gebrauchteKWH"/>
 					</td>
 				</tr>
 				<tr>

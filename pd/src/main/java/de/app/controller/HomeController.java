@@ -44,7 +44,7 @@ public class HomeController {
 
 		String formattedDate = dateFormat.format(date);
 
-		SimpleDateFormat formatter = new SimpleDateFormat("YYYY-dd-MM");
+		SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-dd");
 
 		String query = "select * from entwicklung";
 		String result = customDBUtils.generateJson(query);

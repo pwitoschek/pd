@@ -27,6 +27,7 @@ $(document).ready(function(){
 });
 
 function getResult(date1, date2){
+	console.info(date2);
 	var url = "/pd/entwicklung.json";
 	$.ajax({
 		type : "GET",
@@ -43,6 +44,7 @@ function getResult(date1, date2){
 				
 			}
 			console.info(result);
+			$("#chart1").html("");
 			init(result);
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown){
@@ -83,7 +85,7 @@ function init(line){
 
 	<P>The time on the server is ${serverTime}.</P>
 	
-	<input type="text" name="date1" value="2014-03-11" id="datetimepicker"/>
+	<input type="text" name="date1" value="2014-11-03" id="datetimepicker"/>
 	<input type="text" name="date2" value="${now}" id="datetimepicker"/>
 	<button id="refresh" type="button">Refresh</button>
 	
